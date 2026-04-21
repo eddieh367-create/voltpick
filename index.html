@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="google-site-verification" content="meHRAmuyRYw5dp0l3ffTFOMXpQ4F4PVdgpZTIbZvsbU" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VoltPick — Tech Reviews & Digital Life</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --black:#0a0a0a; --white:#f5f3ee; --accent:#e8ff47; --accent-dim:#c8db30; --gray:#1a1a1a; --gray-mid:#2e2e2e; --gray-light:#5a5a5a; --text-muted:#888; --font-display:'Syne',sans-serif; --font-body:'DM Sans',sans-serif; }
+  html { scroll-behavior: smooth; }
+  body { background:var(--black); color:var(--white); font-family:var(--font-body); font-size:16px; line-height:1.6; overflow-x:hidden; }
+
+  nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:1.25rem 2.5rem; border-bottom:1px solid #1e1e1e; background:rgba(10,10,10,0.92); backdrop-filter:blur(12px); }
+  .logo { font-family:var(--font-display); font-size:1.4rem; font-weight:800; letter-spacing:-0.03em; color:var(--white); text-decoration:none; }
+  .logo span { color:var(--accent); }
+  .nav-links { display:flex; gap:1.75rem; list-style:none; }
+  .nav-links a { font-size:0.82rem; font-weight:500; color:var(--text-muted); text-decoration:none; letter-spacing:0.05em; text-transform:uppercase; transition:color 0.2s; }
+  .nav-links a:hover { color:var(--accent); }
+  .nav-cta { background:var(--accent) !important; color:var(--black) !important; padding:0.5rem 1.25rem; border-radius:100px; font-weight:700 !important; }
+
+  .hero { min-height:100vh; display:flex; flex-direction:column; justify-content:flex-end; padding:0 2.5rem 5rem; position:relative; overflow:hidden; }
+  .hero-bg { position:absolute; inset:0; background:radial-gradient(ellipse 60% 50% at 80% 20%,rgba(232,255,71,0.08) 0%,transparent 70%),radial-gradient(ellipse 40% 60% at 10% 80%,rgba(232,255,71,0.04) 0%,transparent 60%); }
+  .hero-badge { display:inline-flex; align-items:center; gap:0.5rem; background:var(--gray); border:1px solid #2e2e2e; border-radius:100px; padding:0.4rem 1rem; font-size:0.78rem; font-weight:500; letter-spacing:0.06em; text-transform:uppercase; color:var(--text-muted); margin-bottom:1.75rem; width:fit-content; animation:fadeUp 0.8s ease both; }
+  .hero-badge .dot { width:6px; height:6px; border-radius:50%; background:var(--accent); }
+  .hero h1 { font-family:var(--font-display); font-size:clamp(3rem,8vw,7rem); font-weight:800; line-height:0.95; letter-spacing:-0.04em; margin-bottom:1.5rem; animation:fadeUp 0.8s 0.1s ease both; }
+  .hero h1 em { font-style:normal; color:var(--accent); }
+  .hero-sub { max-width:560px; font-size:1.05rem; color:var(--text-muted); font-weight:300; margin-bottom:2.5rem; animation:fadeUp 0.8s 0.2s ease both; line-height:1.7; }
+  .hero-actions { display:flex; gap:1rem; align-items:center; animation:fadeUp 0.8s 0.3s ease both; flex-wrap:wrap; }
+  .btn-primary { background:var(--accent); color:var(--black); font-family:var(--font-display); font-size:0.9rem; font-weight:700; padding:0.85rem 2rem; border-radius:100px; text-decoration:none; transition:background 0.2s,transform 0.15s; display:inline-block; }
+  .btn-primary:hover { background:var(--accent-dim); transform:translateY(-1px); }
+  .btn-secondary { color:var(--text-muted); font-size:0.9rem; text-decoration:none; display:flex; align-items:center; gap:0.4rem; transition:color 0.2s; }
+  .btn-secondary:hover { color:var(--white); }
+  .hero-stats { position:absolute; right:2.5rem; bottom:5rem; display:flex; flex-direction:column; gap:1.5rem; text-align:right; animation:fadeUp 0.8s 0.4s ease both; }
+  .stat-num { font-family:var(--font-display); font-size:2rem; font-weight:800; color:var(--white); letter-spacing:-0.03em; }
+  .stat-label { font-size:0.72rem; color:var(--text-muted); letter-spacing:0.06em; text-transform:uppercase; }
+
+  .ticker { background:var(--accent); padding:0.6rem 0; overflow:hidden; white-space:nowrap; }
+  .ticker-inner { display:inline-flex; animation:ticker 28s linear infinite; }
+  .ticker-item { font-family:var(--font-display); font-size:0.8rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--black); padding:0 2rem; }
+  .ticker-item::after { content:'✦'; margin-left:2rem; }
+
+  .section { padding:6rem 2.5rem; }
+  .section-label { font-size:0.72rem; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); margin-bottom:0.75rem; }
+  .section-title { font-family:var(--font-display); font-size:clamp(1.8rem,4vw,3rem); font-weight:800; letter-spacing:-0.03em; margin-bottom:3rem; line-height:1.1; }
+  .divider { height:1px; background:#1a1a1a; margin:0 2.5rem; }
+
+  .featured-grid { display:grid; grid-template-columns:1.5fr 1fr; grid-template-rows:auto auto; gap:1.5px; background:#1e1e1e; border:1.5px solid #1e1e1e; }
+  .card { background:var(--gray); padding:2.5rem; text-decoration:none; color:var(--white); display:flex; flex-direction:column; justify-content:flex-end; min-height:300px; position:relative; overflow:hidden; transition:background 0.3s; }
+  .card:hover { background:#202020; }
+  .card.span-col { grid-row:span 2; min-height:620px; }
+  .card-icon { font-size:3rem; margin-bottom:auto; opacity:0.6; }
+  .card-tag { display:inline-block; font-size:0.7rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); margin-bottom:0.75rem; }
+  .card-title { font-family:var(--font-display); font-size:1.35rem; font-weight:700; letter-spacing:-0.02em; line-height:1.2; margin-bottom:0.75rem; }
+  .card.span-col .card-title { font-size:1.9rem; }
+  .card-desc { font-size:0.875rem; color:var(--text-muted); line-height:1.6; margin-bottom:1.25rem; font-weight:300; }
+  .card-meta { display:flex; align-items:center; justify-content:space-between; font-size:0.75rem; color:var(--gray-light); }
+  .card-rating { display:flex; gap:2px; color:var(--accent); font-size:0.7rem; }
+  .card-arrow { font-size:1.2rem; color:var(--accent); transition:transform 0.2s; }
+  .card:hover .card-arrow { transform:translate(3px,-3px); }
+  .card-score { position:absolute; top:2rem; right:2rem; font-family:var(--font-display); font-size:2.5rem; font-weight:800; color:var(--accent); letter-spacing:-0.05em; }
+  .card-score span { font-size:1rem; color:var(--gray-light); }
+
+  .pillar-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
+  .pillar-card { border:1px solid #1e1e1e; border-radius:14px; padding:2rem; text-decoration:none; color:var(--white); display:flex; flex-direction:column; gap:1rem; transition:border-color 0.25s,background 0.25s; position:relative; overflow:hidden; }
+  .pillar-card:hover { border-color:var(--accent); background:rgba(232,255,71,0.03); }
+  .pillar-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:var(--accent); transform:scaleX(0); transform-origin:left; transition:transform 0.3s; }
+  .pillar-card:hover::before { transform:scaleX(1); }
+  .pillar-top { display:flex; align-items:center; justify-content:space-between; }
+  .pillar-icon { font-size:2rem; }
+  .pillar-network { font-size:0.65rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:0.25rem 0.65rem; border-radius:100px; }
+  .pillar-network.amazon { background:rgba(255,153,0,0.12); color:#ff9900; }
+  .pillar-network.digi { background:rgba(232,255,71,0.1); color:var(--accent); }
+  .pillar-network.both { background:rgba(100,200,255,0.1); color:#64c8ff; }
+  .pillar-title { font-family:var(--font-display); font-size:1.1rem; font-weight:700; letter-spacing:-0.02em; line-height:1.2; }
+  .pillar-desc { font-size:0.82rem; color:var(--text-muted); line-height:1.65; font-weight:300; }
+  .pillar-articles { display:flex; flex-direction:column; gap:0.4rem; }
+  .pillar-article-link { font-size:0.78rem; color:var(--text-muted); display:flex; align-items:center; gap:0.4rem; transition:color 0.2s; }
+  .pillar-article-link::before { content:'→'; font-size:0.7rem; color:#333; }
+  .pillar-card:hover .pillar-article-link { color:#aaa; }
+
+  .income-strip { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:#1a1a1a; margin:0 2.5rem; border:1px solid #1a1a1a; }
+  .income-cell { background:var(--black); padding:2rem 1.5rem; text-align:center; }
+  .income-num { font-family:var(--font-display); font-size:1.75rem; font-weight:800; color:var(--white); letter-spacing:-0.03em; margin-bottom:0.25rem; }
+  .income-label { font-size:0.72rem; color:var(--text-muted); letter-spacing:0.06em; text-transform:uppercase; }
+
+  .ds-section { padding:6rem 2.5rem; background:#0e0e0e; }
+  .ds-header { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:3rem; flex-wrap:wrap; gap:1rem; }
+  .ds-badge { display:inline-flex; align-items:center; gap:0.5rem; background:rgba(232,255,71,0.08); border:1px solid rgba(232,255,71,0.2); border-radius:100px; padding:0.35rem 0.9rem; font-size:0.72rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent); margin-bottom:0.6rem; width:fit-content; }
+  .ds-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:#1e1e1e; border:1px solid #1e1e1e; }
+  .ds-card { background:#111; padding:2rem; display:flex; flex-direction:column; gap:1rem; text-decoration:none; color:var(--white); position:relative; transition:background 0.25s; overflow:hidden; }
+  .ds-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:var(--accent); transform:scaleX(0); transform-origin:left; transition:transform 0.3s; }
+  .ds-card:hover { background:#161616; }
+  .ds-card:hover::before { transform:scaleX(1); }
+  .ds-card-top { display:flex; align-items:center; justify-content:space-between; }
+  .ds-icon { font-size:2rem; opacity:0.85; }
+  .ds-commission { font-family:var(--font-display); font-size:1.4rem; font-weight:800; color:var(--accent); letter-spacing:-0.03em; }
+  .ds-commission span { font-size:0.72rem; color:var(--text-muted); font-family:var(--font-body); font-weight:400; }
+  .ds-type { font-size:0.68rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted); }
+  .ds-title { font-family:var(--font-display); font-size:1rem; font-weight:700; line-height:1.25; letter-spacing:-0.02em; }
+  .ds-desc { font-size:0.8rem; color:var(--text-muted); line-height:1.65; font-weight:300; flex:1; }
+  .ds-card-footer { display:flex; align-items:center; justify-content:space-between; padding-top:1rem; border-top:1px solid #1e1e1e; }
+  .ds-tag { font-size:0.68rem; padding:0.25rem 0.6rem; border-radius:100px; background:rgba(232,255,71,0.08); color:var(--accent); font-weight:600; }
+  .ds-cta { font-size:0.78rem; color:var(--text-muted); transition:color 0.2s; font-weight:500; }
+  .ds-card:hover .ds-cta { color:var(--accent); }
+  .ds-note { margin-top:2rem; padding:1.25rem 1.5rem; background:rgba(232,255,71,0.04); border:1px solid rgba(232,255,71,0.12); border-radius:10px; font-size:0.8rem; color:var(--text-muted); display:flex; align-items:flex-start; gap:0.75rem; line-height:1.6; }
+  .ds-note strong { color:var(--accent); }
+
+  .how-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
+  .how-card { padding:2rem; border:1px solid #1e1e1e; border-radius:14px; }
+  .how-num { font-family:var(--font-display); font-size:3rem; font-weight:800; color:#222; letter-spacing:-0.05em; margin-bottom:1rem; line-height:1; }
+  .how-title { font-family:var(--font-display); font-size:1rem; font-weight:700; margin-bottom:0.5rem; letter-spacing:-0.02em; }
+  .how-desc { font-size:0.82rem; color:var(--text-muted); line-height:1.65; font-weight:300; }
+
+  .categories { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:1rem; }
+  .cat-card { border:1px solid #1e1e1e; border-radius:12px; padding:1.5rem 1.25rem; text-align:center; text-decoration:none; color:var(--white); display:block; transition:border-color 0.2s,background 0.2s; }
+  .cat-card:hover { border-color:var(--accent); background:rgba(232,255,71,0.04); }
+  .cat-icon { font-size:1.75rem; margin-bottom:0.6rem; }
+  .cat-name { font-family:var(--font-display); font-size:0.88rem; font-weight:700; letter-spacing:-0.01em; margin-bottom:0.2rem; }
+  .cat-count { font-size:0.72rem; color:var(--text-muted); }
+  .cat-network { font-size:0.62rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; margin-top:0.4rem; }
+  .cat-network.amazon { color:#ff9900; }
+  .cat-network.digi { color:var(--accent); }
+  .cat-network.both { color:#64c8ff; }
+
+  .newsletter { background:var(--gray); border:1px solid #2a2a2a; border-radius:16px; padding:4rem; display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center; margin:0 2.5rem 6rem; }
+  .newsletter h2 { font-family:var(--font-display); font-size:2.2rem; font-weight:800; letter-spacing:-0.03em; line-height:1.1; margin-bottom:0.75rem; }
+  .newsletter p { font-size:0.9rem; color:var(--text-muted); font-weight:300; }
+  .newsletter-form { display:flex; gap:0.75rem; }
+  .newsletter-form input { flex:1; background:var(--black); border:1px solid #2e2e2e; border-radius:100px; padding:0.85rem 1.5rem; font-family:var(--font-body); font-size:0.9rem; color:var(--white); outline:none; transition:border-color 0.2s; }
+  .newsletter-form input::placeholder { color:var(--gray-light); }
+  .newsletter-form input:focus { border-color:var(--accent); }
+  .newsletter-form button { background:var(--accent); color:var(--black); border:none; border-radius:100px; padding:0.85rem 1.75rem; font-family:var(--font-display); font-size:0.85rem; font-weight:700; cursor:pointer; white-space:nowrap; transition:background 0.2s; }
+  .newsletter-form button:hover { background:var(--accent-dim); }
+
+  footer { border-top:1px solid #1a1a1a; padding:3rem 2.5rem; display:flex; align-items:center; justify-content:space-between; color:var(--text-muted); font-size:0.82rem; flex-wrap:wrap; gap:1rem; }
+  footer a { color:var(--text-muted); text-decoration:none; transition:color 0.2s; }
+  footer a:hover { color:var(--accent); }
+  .footer-links { display:flex; gap:1.5rem; }
+  .affiliate-disclaimer { background:#0e0e0e; border-top:1px solid #1a1a1a; padding:1rem 2.5rem; font-size:0.72rem; color:#444; text-align:center; line-height:1.6; }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo">Volt<span>Pick</span></a>
+  <ul class="nav-links">
+    <li><a href="#reviews">Tech Reviews</a></li>
+    <li><a href="#topics">Topics</a></li>
+    <li><a href="#deals">Partner Deals</a></li>
+    <li><a href="#categories">Categories</a></li>
+    <li><a href="#newsletter" class="nav-cta">Newsletter</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-badge"><span class="dot"></span>Tech Reviews & Digital Life</div>
+  <h1>Better Tech.<br><em>Smarter</em><br>Money.</h1>
+  <p class="hero-sub">Honest tech reviews to help you buy right — plus the best guides on AI, crypto, privacy, and making money online. Everything a modern digital life needs.</p>
+  <div class="hero-actions">
+    <a href="#reviews" class="btn-primary">Browse Reviews</a>
+    <a href="#topics" class="btn-secondary">Explore Topics →</a>
+  </div>
+  <div class="hero-stats">
+    <div><div class="stat-num">340+</div><div class="stat-label">Products Tested</div></div>
+    <div><div class="stat-num">2</div><div class="stat-label">Affiliate Networks</div></div>
+    <div><div class="stat-num">100%</div><div class="stat-label">Independent</div></div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item">Best Laptops 2026</span><span class="ticker-item">Top VPNs Reviewed</span><span class="ticker-item">AI Tools That Work</span><span class="ticker-item">Make Money Online</span><span class="ticker-item">Crypto for Beginners</span><span class="ticker-item">Best Earbuds</span><span class="ticker-item">Work From Home Gear</span><span class="ticker-item">Smart Home Setup</span><span class="ticker-item">Best Laptops 2026</span><span class="ticker-item">Top VPNs Reviewed</span><span class="ticker-item">AI Tools That Work</span><span class="ticker-item">Make Money Online</span><span class="ticker-item">Crypto for Beginners</span><span class="ticker-item">Best Earbuds</span><span class="ticker-item">Work From Home Gear</span><span class="ticker-item">Smart Home Setup</span>
+  </div>
+</div>
+
+<!-- TECH REVIEWS -->
+<section class="section" id="reviews">
+  <div class="section-label">Featured Reviews · Amazon Links</div>
+  <div class="section-title">Latest Tech<br>We've Tested</div>
+  <div class="featured-grid">
+    <a href="voltpick-review-page.html" class="card span-col">
+      <div class="card-score">9.4<span>/10</span></div>
+      <div class="card-icon">💻</div>
+      <div class="card-tag">Laptop · Editor's Choice</div>
+      <div class="card-title">MacBook Pro M4 — The Benchmark Every Laptop Is Judged Against</div>
+      <div class="card-desc">Apple's M4 chip changes everything we thought we knew about laptop performance. Three weeks of real-world testing.</div>
+      <div class="card-meta"><div class="card-rating">★★★★★</div><span>12 min read</span><div class="card-arrow">↗</div></div>
+    </a>
+    <a href="voltpick-review-page.html" class="card">
+      <div class="card-score">9.1<span>/10</span></div>
+      <div class="card-icon">🎧</div>
+      <div class="card-tag">Audio · Best Value</div>
+      <div class="card-title">Sony WH-1000XM6 — Still King of ANC</div>
+      <div class="card-desc">Near-perfect noise cancellation at a price that makes sense.</div>
+      <div class="card-meta"><div class="card-rating">★★★★★</div><span>8 min read</span><div class="card-arrow">↗</div></div>
+    </a>
+    <a href="voltpick-review-page.html" class="card">
+      <div class="card-score">8.7<span>/10</span></div>
+      <div class="card-icon">📱</div>
+      <div class="card-tag">Smartphone · Top Pick</div>
+      <div class="card-title">Pixel 9 Pro — Google's Best Camera Yet</div>
+      <div class="card-desc">The camera system alone justifies the price for most users.</div>
+      <div class="card-meta"><div class="card-rating">★★★★☆</div><span>10 min read</span><div class="card-arrow">↗</div></div>
+    </a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TOPIC PILLARS -->
+<section class="section" id="topics">
+  <div class="section-label">Content Strategy · Dual Network</div>
+  <div class="section-title">Everything<br>We Cover</div>
+  <div class="pillar-grid">
+    <a href="#" class="pillar-card">
+      <div class="pillar-top"><div class="pillar-icon">💻</div><span class="pillar-network amazon">Amazon</span></div>
+      <div class="pillar-title">Tech Reviews</div>
+      <div class="pillar-desc">Laptops, phones, headphones, monitors, smart home gear. Every product reviewed and linked to Amazon.</div>
+      <div class="pillar-articles">
+        <span class="pillar-article-link">Best laptops for working from home 2026</span>
+        <span class="pillar-article-link">Top wireless earbuds under $100</span>
+        <span class="pillar-article-link">Gaming monitors worth buying</span>
+      </div>
+    </a>
+    <a href="#" class="pillar-card">
+      <div class="pillar-top"><div class="pillar-icon">🤖</div><span class="pillar-network digi">Digistore24</span></div>
+      <div class="pillar-title">AI & Productivity</div>
+      <div class="pillar-desc">How to use AI tools to work faster, automate tasks, and earn more. Pairs naturally with any laptop or software review.</div>
+      <div class="pillar-articles">
+        <span class="pillar-article-link">Best AI tools to boost your workflow in 2026</span>
+        <span class="pillar-article-link">How to use ChatGPT to make money online</span>
+        <span class="pillar-article-link">AI automation for beginners</span>
+      </div>
+    </a>
+    <a href="#" class="pillar-card">
+      <div class="pillar-top"><div class="pillar-icon">🔐</div><span class="pillar-network both">Both</span></div>
+      <div class="pillar-title">Privacy & Security</div>
+      <div class="pillar-desc">VPN hardware reviews (Amazon) + privacy courses (Digistore24). Every tech user needs this — huge conversion potential.</div>
+      <div class="pillar-articles">
+        <span class="pillar-article-link">Best VPN routers reviewed</span>
+        <span class="pillar-article-link">How to protect your data online</span>
+        <span class="pillar-article-link">VPN mastery course — is it worth it?</span>
+      </div>
+    </a>
+    <a href="#" class="pillar-card">
+      <div class="pillar-top"><div class="pillar-icon">💰</div><span class="pillar-network digi">Digistore24</span></div>
+      <div class="pillar-title">Make Money Online</div>
+      <div class="pillar-desc">Affiliate marketing, Amazon income blueprints, freelancing guides. Highest Digistore24 commissions — up to 75%.</div>
+      <div class="pillar-articles">
+        <span class="pillar-article-link">How to start affiliate marketing in 2026</span>
+        <span class="pillar-article-link">The AZ Code review — is it worth it?</span>
+        <span class="pillar-article-link">Best side hustles using your laptop</span>
+      </div>
+    </a>
+    <a href="#" class="pillar-card">
+      <div class="pillar-top"><div class="pillar-icon">📈</div><span class="pillar-network digi">Digistore24</span></div>
+      <div class="pillar-title">Crypto & Investing</div>
+      <div class="pillar-desc">Crypto guides, trading tools, and investment courses for tech-savvy readers. Converts strongly with the VoltPick audience.</div>
+      <div class="pillar-articles">
+        <span class="pillar-article-link">Crypto for beginners — where to start in 2026</span>
+        <span class="pillar-article-link">Intelligent Cryptocurrency VIP review</span>
+        <span class="pillar-article-link">Best apps for tracking your crypto portfolio</span>
+      </div>
+    </a>
+    <a href="#" class="pillar-card">
+      <div class="pillar-top"><div class="pillar-icon">🏠</div><span class="pillar-network both">Both</span></div>
+      <div class="pillar-title">Work From Home</div>
+      <div class="pillar-desc">Home office gear reviews (Amazon) + freelancing and remote income courses (Digistore24). The perfect combo category.</div>
+      <div class="pillar-articles">
+        <span class="pillar-article-link">Best home office setup under $500</span>
+        <span class="pillar-article-link">Top webcams and microphones reviewed</span>
+        <span class="pillar-article-link">Tech freelancer fast-start program review</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- INCOME STRIP -->
+<div class="income-strip">
+  <div class="income-cell"><div class="income-num">3–8%</div><div class="income-label">Amazon Commission</div></div>
+  <div class="income-cell"><div class="income-num">50–75%</div><div class="income-label">Digistore24 Commission</div></div>
+  <div class="income-cell"><div class="income-num">Weekly</div><div class="income-label">Digistore24 Payouts</div></div>
+  <div class="income-cell"><div class="income-num">2x</div><div class="income-label">Combined Earning Power</div></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- HOW IT WORKS -->
+<section class="section">
+  <div class="section-label">Our Strategy</div>
+  <div class="section-title">How VoltPick<br>Earns From Both</div>
+  <div class="how-grid">
+    <div class="how-card">
+      <div class="how-num">01</div>
+      <div class="how-title">Publish Tech Reviews</div>
+      <div class="how-desc">Every review links to the product on Amazon. Readers buy — we earn 3–8% commission. Consistent, steady income.</div>
+    </div>
+    <div class="how-card">
+      <div class="how-num">02</div>
+      <div class="how-title">Add Digistore24 Everywhere</div>
+      <div class="how-desc">Every page shows relevant digital courses in the sidebar and between sections. Same traffic, 50–75% commissions.</div>
+    </div>
+    <div class="how-card">
+      <div class="how-num">03</div>
+      <div class="how-title">Write Crossover Content</div>
+      <div class="how-desc">"Best VPN for your new laptop" or "AI tools for remote workers" — articles that earn from both networks at once.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- DIGISTORE24 DEALS -->
+<section class="ds-section" id="deals">
+  <div class="ds-header">
+    <div>
+      <div class="ds-badge">⚡ Digistore24 Partner Picks</div>
+      <div class="section-title" style="margin-bottom:0;">High-Commission<br>Digital Products</div>
+    </div>
+    <p style="font-size:0.875rem;color:var(--text-muted);max-width:320px;font-weight:300;line-height:1.8;">These digital products match our readers' interests and pay 50–75% commission — covering what tech products can't on Amazon.</p>
+  </div>
+  <div class="ds-grid">
+    <a href="#" class="ds-card">
+      <div class="ds-card-top"><div class="ds-icon">💰</div><div class="ds-commission">75% <span>commission</span></div></div>
+      <div class="ds-type">Course · Make Money Online</div>
+      <div class="ds-title">The AZ Code — Amazon Earnings Blueprint</div>
+      <div class="ds-desc">Teaches readers how to earn with Amazon. Perfect for a tech audience already shopping on Amazon daily.</div>
+      <div class="ds-card-footer"><span class="ds-tag">Best Commission</span><span class="ds-cta">Get link →</span></div>
+    </a>
+    <a href="#" class="ds-card">
+      <div class="ds-card-top"><div class="ds-icon">🤖</div><div class="ds-commission">65% <span>commission</span></div></div>
+      <div class="ds-type">Course · AI Skills</div>
+      <div class="ds-title">AI Tools for Everyday Work</div>
+      <div class="ds-desc">Training on AI tools tech readers already use. Converts well alongside any laptop or productivity review.</div>
+      <div class="ds-card-footer"><span class="ds-tag">Top Seller</span><span class="ds-cta">Get link →</span></div>
+    </a>
+    <a href="#" class="ds-card">
+      <div class="ds-card-top"><div class="ds-icon">🔐</div><div class="ds-commission">70% <span>commission</span></div></div>
+      <div class="ds-type">Course · Privacy & Security</div>
+      <div class="ds-title">VPN & Privacy Mastery</div>
+      <div class="ds-desc">Every laptop and phone buyer needs this. Pairs naturally with hardware reviews and converts at high rates.</div>
+      <div class="ds-card-footer"><span class="ds-tag">High EPC</span><span class="ds-cta">Get link →</span></div>
+    </a>
+    <a href="#" class="ds-card">
+      <div class="ds-card-top"><div class="ds-icon">📈</div><div class="ds-commission">60% <span>commission</span></div></div>
+      <div class="ds-type">Course · Crypto & Finance</div>
+      <div class="ds-title">Intelligent Cryptocurrency VIP</div>
+      <div class="ds-desc">Low refund rates, high EPC. Tech-savvy readers are naturally crypto-curious — converts strongly on VoltPick.</div>
+      <div class="ds-card-footer"><span class="ds-tag">Low Refunds</span><span class="ds-cta">Get link →</span></div>
+    </a>
+    <a href="#" class="ds-card">
+      <div class="ds-card-top"><div class="ds-icon">🎓</div><div class="ds-commission">60% <span>commission</span></div></div>
+      <div class="ds-type">Course · Freelancing</div>
+      <div class="ds-title">Tech Freelancer Fast-Start Program</div>
+      <div class="ds-desc">Helps readers turn tech skills into freelance income. Strong match for work-from-home content pages.</div>
+      <div class="ds-card-footer"><span class="ds-tag">Growing Niche</span><span class="ds-cta">Get link →</span></div>
+    </a>
+    <a href="#" class="ds-card">
+      <div class="ds-card-top"><div class="ds-icon">🛠️</div><div class="ds-commission">55% <span>commission</span></div></div>
+      <div class="ds-type">Software · Productivity</div>
+      <div class="ds-title">Ultimate SEO & Website Builder Bundle</div>
+      <div class="ds-desc">Readers inspired by VoltPick who want their own blog. Recurring commissions make this a long-term earner.</div>
+      <div class="ds-card-footer"><span class="ds-tag">Recurring</span><span class="ds-cta">Get link →</span></div>
+    </a>
+  </div>
+  <div class="ds-note">
+    <span>⚡</span>
+    <span><strong>How to activate:</strong> Sign up free at <strong>digistore24.com</strong> → Marketplace → search product → click "Promote" → copy your unique link → replace each <code style="background:#1e1e1e;padding:1px 5px;border-radius:4px;font-size:0.78rem;">href="#"</code> above.</span>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CATEGORIES -->
+<section class="section" id="categories">
+  <div class="section-label">Browse by Category</div>
+  <div class="section-title">Find What<br>You Need</div>
+  <div class="categories">
+    <a href="#" class="cat-card"><div class="cat-icon">💻</div><div class="cat-name">Laptops</div><div class="cat-count">48 reviews</div><div class="cat-network amazon">Amazon</div></a>
+    <a href="#" class="cat-card"><div class="cat-icon">📱</div><div class="cat-name">Phones</div><div class="cat-count">62 reviews</div><div class="cat-network amazon">Amazon</div></a>
+    <a href="#" class="cat-card"><div class="cat-icon">🎧</div><div class="cat-name">Audio</div><div class="cat-count">35 reviews</div><div class="cat-network amazon">Amazon</div></a>
+    <a href="#" class="cat-card"><div class="cat-icon">🔐</div><div class="cat-name">Privacy</div><div class="cat-count">12 guides</div><div class="cat-network both">Both</div></a>
+    <a href="#" class="cat-card"><div class="cat-icon">🤖</div><div class="cat-name">AI Tools</div><div class="cat-count">18 guides</div><div class="cat-network digi">Digistore24</div></a>
+    <a href="#" class="cat-card"><div class="cat-icon">💰</div><div class="cat-name">Make Money</div><div class="cat-count">14 guides</div><div class="cat-network digi">Digistore24</div></a>
+    <a href="#" class="cat-card"><div class="cat-icon">📈</div><div class="cat-name">Crypto</div><div class="cat-count">10 guides</div><div class="cat-network digi">Digistore24</div></a>
+    <a href="#" class="cat-card"><div class="cat-icon">🏠</div><div class="cat-name">Work From Home</div><div class="cat-count">22 guides</div><div class="cat-network both">Both</div></a>
+    <a href="#" class="cat-card"><div class="cat-icon">🎮</div><div class="cat-name">Gaming</div><div class="cat-count">41 reviews</div><div class="cat-network amazon">Amazon</div></a>
+    <a href="#" class="cat-card"><div class="cat-icon">🖥️</div><div class="cat-name">Monitors</div><div class="cat-count">29 reviews</div><div class="cat-network amazon">Amazon</div></a>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<div class="newsletter" id="newsletter">
+  <div>
+    <div class="section-label">Weekly Newsletter</div>
+    <h2>Tech Picks &<br>Digital Income Tips</h2>
+    <p>Join 12,000+ readers who get the best tech reviews, AI tool guides, and money-making strategies every Tuesday — free.</p>
+  </div>
+  <div>
+    <div class="newsletter-form">
+      <input type="email" placeholder="your@email.com" />
+      <button type="button">Subscribe</button>
+    </div>
+    <p style="margin-top:0.75rem;font-size:0.75rem;">No spam. Unsubscribe anytime.</p>
+  </div>
+</div>
+
+<div class="affiliate-disclaimer">
+  VoltPick is reader-supported. We earn commissions from Amazon Associates and Digistore24 when you purchase through our links — at no extra cost to you. All reviews and guides are independently produced.
+</div>
+
+<footer>
+  <a href="#" class="logo" style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;letter-spacing:-0.03em;color:#f5f3ee;text-decoration:none;">Volt<span style="color:#e8ff47;">Pick</span></a>
+  <div class="footer-links">
+    <a href="#">About</a>
+    <a href="#">Affiliate Disclosure</a>
+    <a href="#">Privacy Policy</a>
+    <a href="#">Contact</a>
+  </div>
+  <span>© 2026 VoltPick. All rights reserved.</span>
+</footer>
+
+</body>
+</html>
