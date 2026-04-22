@@ -4,218 +4,238 @@
 <meta charset="UTF-8">
 <meta name="google-site-verification" content="OtwkHZB-OHAaMFmYfrRRGj4r2PInVi-9uDicApHL454" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SmartLife Review — Tech, AI, Budgeting & Wellness</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>IncomeLift — Make Money Online, Side Hustles & Financial Freedom</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --navy:#0f1f3d;
-  --teal:#0097a7;
-  --green:#2e7d32;
-  --amber:#f57c00;
-  --rose:#c2185b;
-  --bg:#fafaf8;
+  --green:#00664a;
+  --green-light:#00875f;
+  --green-pale:#e8f5f0;
+  --gold:#b8860b;
+  --gold-light:#f5f0e0;
+  --navy:#0d1f35;
+  --navy-mid:#1a3a5c;
+  --bg:#fdfcf9;
   --card:#ffffff;
-  --border:#e8e4dc;
+  --border:#e8e2d6;
   --text:#1a1a1a;
-  --muted:#6b7280;
-  --light:#f3f0e8;
-  --font-head:'Playfair Display',serif;
-  --font-body:'Inter',sans-serif;
+  --muted:#6b6b6b;
+  --light:#f7f4ef;
+  --font-head:'DM Serif Display',serif;
+  --font-body:'DM Sans',sans-serif;
 }
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:var(--font-body);overflow-x:hidden;font-size:16px;line-height:1.6}
 
 /* TOP BAR */
-.top-bar{background:var(--navy);padding:0.5rem 2rem;display:flex;align-items:center;justify-content:space-between}
-.top-bar-left{font-size:0.72rem;color:#8899bb;letter-spacing:0.06em}
-.top-bar-right{display:flex;gap:1.5rem}
-.top-bar-right a{font-size:0.72rem;color:#8899bb;text-decoration:none;letter-spacing:0.04em;transition:color 0.2s}
-.top-bar-right a:hover{color:#fff}
+.top-bar{background:var(--navy);padding:0.5rem 2rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #1e3a5c}
+.top-bar-date{font-size:0.7rem;color:#7a9cbf;letter-spacing:0.06em;font-style:italic}
+.top-bar-links{display:flex;gap:1.5rem}
+.top-bar-links a{font-size:0.7rem;color:#7a9cbf;text-decoration:none;letter-spacing:0.05em;transition:color 0.2s}
+.top-bar-links a:hover{color:#fff}
 
 /* NAV */
-nav{background:var(--card);border-bottom:2px solid var(--border);padding:0 2rem;position:sticky;top:0;z-index:100}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto;padding:1rem 0}
-.logo{font-family:var(--font-head);font-size:1.6rem;font-weight:800;color:var(--navy);text-decoration:none;letter-spacing:-0.02em;line-height:1}
-.logo em{color:var(--teal);font-style:normal}
-.logo small{display:block;font-family:var(--font-body);font-size:0.6rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-top:1px}
-.nav-cats{display:flex;gap:0;list-style:none}
-.nav-cats a{font-size:0.8rem;font-weight:500;color:var(--muted);text-decoration:none;padding:0.5rem 1rem;border-radius:6px;transition:color 0.2s,background 0.2s;letter-spacing:0.02em}
-.nav-cats a:hover{color:var(--navy);background:var(--light)}
-.nav-cats a.active{color:var(--teal);font-weight:600}
-.nav-subscribe{background:var(--navy);color:#fff;font-size:0.78rem;font-weight:600;padding:0.55rem 1.25rem;border-radius:100px;text-decoration:none;transition:background 0.2s;letter-spacing:0.03em}
-.nav-subscribe:hover{background:var(--teal)}
+nav{background:var(--card);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;box-shadow:0 1px 12px rgba(0,0,0,0.06)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:70px}
+.logo{text-decoration:none;display:flex;flex-direction:column;gap:0}
+.logo-main{font-family:var(--font-head);font-size:1.8rem;color:var(--navy);letter-spacing:-0.02em;line-height:1}
+.logo-main em{color:var(--green);font-style:normal}
+.logo-tag{font-size:0.58rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted)}
+.nav-links{display:flex;gap:0;list-style:none}
+.nav-links a{font-size:0.82rem;font-weight:500;color:var(--muted);text-decoration:none;padding:0.5rem 1rem;border-radius:6px;transition:color 0.2s,background 0.2s;letter-spacing:0.01em}
+.nav-links a:hover{color:var(--green);background:var(--green-pale)}
+.nav-cta{background:var(--green);color:#fff !important;border-radius:100px;padding:0.55rem 1.25rem !important;font-weight:600 !important;transition:background 0.2s !important}
+.nav-cta:hover{background:var(--green-light) !important}
 
 /* HERO */
-.hero{background:var(--navy);padding:4rem 2rem 3rem}
-.hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.2fr 1fr;gap:4rem;align-items:center}
-.hero-eyebrow{font-size:0.7rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--teal);margin-bottom:1rem}
-.hero h1{font-family:var(--font-head);font-size:clamp(2.2rem,4vw,3.8rem);font-weight:800;color:#fff;line-height:1.1;letter-spacing:-0.02em;margin-bottom:1.25rem}
-.hero h1 em{font-style:italic;color:#93c5fd}
-.hero-sub{font-size:1rem;color:#94a3b8;font-weight:300;line-height:1.75;margin-bottom:2rem;max-width:480px}
-.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
-.btn-primary{background:var(--teal);color:#fff;font-size:0.85rem;font-weight:600;padding:0.85rem 1.75rem;border-radius:8px;text-decoration:none;transition:background 0.2s,transform 0.15s;letter-spacing:0.02em}
-.btn-primary:hover{background:#00838f;transform:translateY(-1px)}
-.btn-ghost{color:#94a3b8;font-size:0.85rem;padding:0.85rem 1.75rem;border-radius:8px;border:1px solid #2d3f5e;text-decoration:none;transition:border-color 0.2s,color 0.2s}
-.btn-ghost:hover{border-color:var(--teal);color:#fff}
+.hero{background:var(--navy);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:0;right:0;width:50%;height:100%;background:linear-gradient(135deg,transparent 0%,rgba(0,102,74,0.08) 100%)}
+.hero::after{content:'';position:absolute;bottom:-60px;left:-60px;width:300px;height:300px;border-radius:50%;border:1px solid rgba(255,255,255,0.04)}
+.hero-inner{max-width:1200px;margin:0 auto;padding:5rem 2rem 4rem;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;position:relative;z-index:1}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:0.6rem;font-size:0.7rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:#4db88a;margin-bottom:1.5rem}
+.hero-eyebrow::before{content:'';width:20px;height:1px;background:#4db88a}
+.hero h1{font-family:var(--font-head);font-size:clamp(2.2rem,4vw,3.8rem);color:#fff;line-height:1.1;letter-spacing:-0.02em;margin-bottom:1.5rem}
+.hero h1 em{font-style:italic;color:#4db88a}
+.hero-sub{font-size:1rem;color:#8aa8c4;font-weight:300;line-height:1.8;margin-bottom:2.5rem;max-width:460px}
+.hero-actions{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+.btn-green{background:var(--green);color:#fff;font-size:0.85rem;font-weight:600;padding:0.9rem 2rem;border-radius:8px;text-decoration:none;transition:background 0.2s,transform 0.15s;letter-spacing:0.02em}
+.btn-green:hover{background:var(--green-light);transform:translateY(-1px)}
+.btn-outline-white{color:#8aa8c4;font-size:0.85rem;padding:0.9rem 2rem;border-radius:8px;border:1px solid #2a4a6a;text-decoration:none;transition:all 0.2s}
+.btn-outline-white:hover{border-color:#4db88a;color:#4db88a}
 .hero-right{display:flex;flex-direction:column;gap:1rem}
-.hero-pill{background:#1a2f52;border-radius:12px;padding:1.25rem 1.5rem;display:flex;align-items:center;gap:1rem;border:1px solid #2d3f5e;transition:border-color 0.2s}
-.hero-pill:hover{border-color:var(--teal)}
-.hero-pill-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
-.hpi-tech{background:rgba(0,151,167,0.15)}
-.hpi-ai{background:rgba(124,58,237,0.15)}
-.hpi-budget{background:rgba(245,124,0,0.15)}
-.hpi-wellness{background:rgba(46,125,50,0.15)}
-.hero-pill-text{flex:1}
-.hero-pill-label{font-size:0.65rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#64748b;margin-bottom:2px}
-.hero-pill-title{font-size:0.88rem;font-weight:500;color:#e2e8f0;line-height:1.3}
+.hero-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:1.5rem;display:flex;align-items:flex-start;gap:1rem;transition:border-color 0.2s,background 0.2s}
+.hero-card:hover{border-color:rgba(77,184,138,0.3);background:rgba(77,184,138,0.04)}
+.hc-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.hci-1{background:rgba(0,102,74,0.3)}
+.hci-2{background:rgba(184,134,11,0.2)}
+.hci-3{background:rgba(77,184,138,0.15)}
+.hci-4{background:rgba(138,168,196,0.15)}
+.hc-text{}
+.hc-label{font-size:0.65rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#4a6a8a;margin-bottom:3px}
+.hc-title{font-size:0.88rem;font-weight:500;color:#c8d8e8;line-height:1.35}
 
 /* TICKER */
-.ticker{background:var(--teal);padding:0.55rem 0;overflow:hidden;white-space:nowrap}
+.ticker{background:var(--green);padding:0.6rem 0;overflow:hidden;white-space:nowrap;border-top:1px solid rgba(255,255,255,0.1)}
 .ticker-inner{display:inline-flex;animation:ticker 30s linear infinite}
-.ticker-item{font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#fff;padding:0 2rem;opacity:0.9}
-.ticker-item::after{content:'·';margin-left:2rem;opacity:0.5}
+.ticker-item{font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.9);padding:0 2.5rem}
+.ticker-item::after{content:'◆';margin-left:2.5rem;opacity:0.4;font-size:0.5rem}
 
-/* LAYOUT */
-.page-wrap{max-width:1200px;margin:0 auto;padding:0 2rem}
-.section{padding:4rem 0}
-.section-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:2rem;padding-bottom:0.75rem;border-bottom:2px solid var(--border)}
-.section-title{font-family:var(--font-head);font-size:1.5rem;font-weight:700;color:var(--navy);letter-spacing:-0.02em}
-.section-link{font-size:0.78rem;font-weight:600;color:var(--teal);text-decoration:none;letter-spacing:0.04em}
-.section-link:hover{text-decoration:underline}
+/* MAIN LAYOUT */
+.main-wrap{max-width:1200px;margin:0 auto;padding:0 2rem}
 
-/* CATEGORY PILLS */
-.cat-strip{display:flex;gap:0.75rem;margin-bottom:2.5rem;flex-wrap:wrap}
-.cat-pill{display:flex;align-items:center;gap:0.5rem;padding:0.5rem 1rem;border-radius:100px;font-size:0.75rem;font-weight:600;letter-spacing:0.04em;text-decoration:none;border:1.5px solid;transition:transform 0.15s,box-shadow 0.15s}
-.cat-pill:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,0.1)}
-.cp-tech{background:#e0f7fa;color:#006064;border-color:#80deea}
-.cp-ai{background:#ede9fe;color:#4c1d95;border-color:#c4b5fd}
-.cp-budget{background:#fff3e0;color:#e65100;border-color:#ffcc80}
-.cp-wellness{background:#e8f5e9;color:#1b5e20;border-color:#a5d6a7}
+/* SECTION HEADERS */
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:1.75rem;padding-bottom:0.75rem;border-bottom:2px solid var(--border)}
+.sec-title{font-family:var(--font-head);font-size:1.6rem;color:var(--navy);letter-spacing:-0.02em}
+.sec-link{font-size:0.78rem;font-weight:600;color:var(--green);text-decoration:none;letter-spacing:0.04em}
+.sec-link:hover{text-decoration:underline}
 
-/* ARTICLE CARDS */
-.main-grid{display:grid;grid-template-columns:2fr 1fr;gap:2rem}
-.featured-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;text-decoration:none;color:var(--text);display:flex;flex-direction:column;transition:box-shadow 0.2s,transform 0.2s}
-.featured-card:hover{box-shadow:0 8px 40px rgba(0,0,0,0.1);transform:translateY(-2px)}
-.featured-img{height:240px;display:flex;align-items:center;justify-content:center;font-size:4rem;position:relative}
-.fi-tech{background:linear-gradient(135deg,#e0f7fa,#b2ebf2)}
-.fi-ai{background:linear-gradient(135deg,#ede9fe,#ddd6fe)}
-.fi-budget{background:linear-gradient(135deg,#fff3e0,#ffe0b2)}
-.fi-wellness{background:linear-gradient(135deg,#e8f5e9,#c8e6c9)}
-.featured-body{padding:1.75rem;flex:1;display:flex;flex-direction:column}
-.article-tag{display:inline-flex;align-items:center;gap:0.35rem;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:0.25rem 0.75rem;border-radius:100px;margin-bottom:1rem;width:fit-content}
-.at-tech{background:#e0f7fa;color:#006064}
-.at-ai{background:#ede9fe;color:#4c1d95}
-.at-budget{background:#fff3e0;color:#e65100}
-.at-wellness{background:#e8f5e9;color:#1b5e20}
-.at-both{background:#f0f9ff;color:#0369a1}
-.article-title{font-family:var(--font-head);font-size:1.25rem;font-weight:700;line-height:1.3;letter-spacing:-0.02em;margin-bottom:0.75rem;color:var(--navy)}
-.featured-card .article-title{font-size:1.5rem}
-.article-desc{font-size:0.85rem;color:var(--muted);line-height:1.7;font-weight:300;margin-bottom:1.25rem;flex:1}
-.article-footer{display:flex;align-items:center;justify-content:space-between;padding-top:1rem;border-top:1px solid var(--border)}
-.article-meta{font-size:0.72rem;color:var(--muted);display:flex;align-items:center;gap:0.75rem}
-.meta-dot{width:3px;height:3px;border-radius:50%;background:var(--border)}
-.read-more{font-size:0.75rem;font-weight:600;color:var(--teal);text-decoration:none}
-.read-more:hover{text-decoration:underline}
+/* FEATURED SECTION */
+.featured-wrap{padding:4rem 0}
+.featured-grid{display:grid;grid-template-columns:1.8fr 1fr;gap:2rem}
+.feat-card{background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden;text-decoration:none;color:var(--text);display:flex;flex-direction:column;transition:box-shadow 0.25s,transform 0.25s}
+.feat-card:hover{box-shadow:0 12px 50px rgba(0,0,0,0.1);transform:translateY(-3px)}
+.feat-img{height:220px;display:flex;align-items:center;justify-content:center;font-size:4.5rem;position:relative;overflow:hidden}
+.fi-earn{background:linear-gradient(135deg,#e8f5f0 0%,#c8ead8 100%)}
+.fi-budget{background:linear-gradient(135deg,#f5f0e0 0%,#ead8a8 100%)}
+.fi-side{background:linear-gradient(135deg,#e8eef5 0%,#c8d8ea 100%)}
+.fi-crypto{background:linear-gradient(135deg,#f0e8f5 0%,#d8c8ea 100%)}
+.fi-ai{background:linear-gradient(135deg,#e8f0f5 0%,#c8daea 100%)}
+.feat-body{padding:1.75rem;flex:1;display:flex;flex-direction:column}
+.art-tag{display:inline-flex;align-items:center;gap:0.35rem;font-size:0.65rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:0.28rem 0.75rem;border-radius:100px;margin-bottom:1rem;width:fit-content}
+.tag-earn{background:#e8f5f0;color:#00664a}
+.tag-budget{background:#f5f0e0;color:#7a5800}
+.tag-side{background:#e8eef5;color:#1a3a6a}
+.tag-crypto{background:#f0e8f5;color:#4a1a6a}
+.tag-ai{background:#e8f5f5;color:#004a4a}
+.tag-review{background:#fff0e8;color:#6a2a00}
+.art-title{font-family:var(--font-head);font-size:1.25rem;letter-spacing:-0.02em;line-height:1.3;margin-bottom:0.75rem;color:var(--navy)}
+.feat-card .art-title{font-size:1.55rem}
+.art-desc{font-size:0.85rem;color:var(--muted);line-height:1.75;font-weight:300;margin-bottom:1.25rem;flex:1}
+.art-foot{display:flex;align-items:center;justify-content:space-between;padding-top:1rem;border-top:1px solid var(--border)}
+.art-meta{font-size:0.72rem;color:var(--muted);display:flex;gap:0.6rem;align-items:center}
+.art-meta span{opacity:0.5}
+.read-btn{font-size:0.75rem;font-weight:600;color:var(--green);text-decoration:none;display:flex;align-items:center;gap:0.3rem}
+.read-btn:hover{text-decoration:underline}
 
-.sidebar-cards{display:flex;flex-direction:column;gap:1.25rem}
-.side-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;text-decoration:none;color:var(--text);display:flex;gap:0;transition:box-shadow 0.2s}
-.side-card:hover{box-shadow:0 4px 20px rgba(0,0,0,0.08)}
-.side-card-color{width:6px;flex-shrink:0}
-.sc-tech{background:var(--teal)}
-.sc-ai{background:#7c3aed}
-.sc-budget{background:var(--amber)}
-.sc-wellness{background:var(--green)}
-.side-card-body{padding:1rem 1.25rem;flex:1}
-.side-card .article-tag{margin-bottom:0.5rem}
-.side-card .article-title{font-size:0.92rem;margin-bottom:0.4rem}
-.side-card-meta{font-size:0.7rem;color:var(--muted)}
+.side-list{display:flex;flex-direction:column;gap:1.25rem}
+.side-art{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;text-decoration:none;color:var(--text);display:flex;transition:box-shadow 0.2s,transform 0.2s}
+.side-art:hover{box-shadow:0 4px 24px rgba(0,0,0,0.08);transform:translateY(-2px)}
+.side-art-color{width:5px;flex-shrink:0}
+.sac-earn{background:var(--green)}
+.sac-budget{background:var(--gold)}
+.sac-side{background:#1a5a9a}
+.sac-crypto{background:#6a1a9a}
+.side-art-body{padding:1rem 1.25rem;flex:1}
+.side-art .art-tag{margin-bottom:0.4rem}
+.side-art .art-title{font-size:0.92rem;margin-bottom:0.3rem;font-family:var(--font-head)}
+.side-art-meta{font-size:0.7rem;color:var(--muted)}
 
-/* FOUR NICHES */
-.niches-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem}
-.niche-card{border-radius:16px;padding:2rem 1.5rem;text-decoration:none;display:flex;flex-direction:column;gap:0.75rem;border:1.5px solid;transition:transform 0.2s,box-shadow 0.2s}
-.niche-card:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,0.1)}
-.nc-tech{background:#e0f7fa;border-color:#80deea;color:#006064}
-.nc-ai{background:#ede9fe;border-color:#c4b5fd;color:#4c1d95}
-.nc-budget{background:#fff3e0;border-color:#ffcc80;color:#e65100}
-.nc-wellness{background:#e8f5e9;border-color:#a5d6a7;color:#1b5e20}
-.niche-icon{font-size:2rem}
-.niche-title{font-family:var(--font-head);font-size:1.1rem;font-weight:700;letter-spacing:-0.02em}
-.niche-desc{font-size:0.78rem;line-height:1.65;font-weight:400;opacity:0.8}
-.niche-count{font-size:0.7rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;opacity:0.6;margin-top:auto}
-.niche-links{display:flex;flex-direction:column;gap:0.3rem;margin-top:0.5rem}
-.niche-link{font-size:0.72rem;font-weight:500;opacity:0.75;display:flex;align-items:center;gap:0.35rem}
-.niche-link::before{content:'→';font-size:0.65rem}
+/* INCOME NUMBERS */
+.numbers-strip{background:var(--navy);margin:0}
+.numbers-inner{max-width:1200px;margin:0 auto;padding:2.5rem 2rem;display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-left:1px solid rgba(255,255,255,0.06)}
+.num-cell{padding:1.5rem 2rem;border-right:1px solid rgba(255,255,255,0.06);text-align:center}
+.num-val{font-family:var(--font-head);font-size:2rem;color:#fff;letter-spacing:-0.04em;margin-bottom:0.25rem}
+.num-val em{font-style:normal;color:#4db88a}
+.num-label{font-size:0.68rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#4a6a8a}
 
-/* DEALS STRIP */
-.deals-strip{background:var(--navy);padding:4rem 0}
-.deals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:2rem}
-.deal-card{background:#1a2f52;border:1px solid #2d3f5e;border-radius:14px;padding:1.5rem;text-decoration:none;color:#fff;display:flex;flex-direction:column;gap:0.75rem;transition:border-color 0.2s,transform 0.2s}
-.deal-card:hover{border-color:var(--teal);transform:translateY(-2px)}
+/* CATEGORIES */
+.cats-section{background:var(--light);padding:4rem 0}
+.cats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem}
+.cat-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem 1.5rem;text-decoration:none;color:var(--text);display:flex;flex-direction:column;gap:0.75rem;transition:border-color 0.25s,box-shadow 0.25s,transform 0.25s;position:relative;overflow:hidden}
+.cat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;transition:opacity 0.25s}
+.cat-card:hover{border-color:transparent;box-shadow:0 8px 40px rgba(0,0,0,0.1);transform:translateY(-3px)}
+.cc-earn::before{background:var(--green)}
+.cc-side::before{background:#1a5a9a}
+.cc-budget::before{background:var(--gold)}
+.cc-crypto::before{background:#6a1a9a}
+.cat-icon{font-size:2rem}
+.cat-title{font-family:var(--font-head);font-size:1.1rem;color:var(--navy);letter-spacing:-0.02em}
+.cat-desc{font-size:0.8rem;color:var(--muted);line-height:1.65;font-weight:300}
+.cat-arts{display:flex;flex-direction:column;gap:0.35rem;margin-top:0.25rem}
+.cat-art{font-size:0.75rem;color:var(--muted);display:flex;align-items:center;gap:0.4rem}
+.cat-art::before{content:'→';font-size:0.65rem;color:var(--border)}
+.cat-count{font-size:0.65rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-top:auto;padding-top:0.5rem;border-top:1px solid var(--border)}
+.cc-earn .cat-count{color:var(--green)}
+.cc-side .cat-count{color:#1a5a9a}
+.cc-budget .cat-count{color:var(--gold)}
+.cc-crypto .cat-count{color:#6a1a9a}
+
+/* PARTNER DEALS */
+.deals-section{padding:4rem 0}
+.deals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.deal-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.75rem;text-decoration:none;color:var(--text);display:flex;flex-direction:column;gap:0.85rem;transition:border-color 0.2s,box-shadow 0.2s,transform 0.2s;position:relative;overflow:hidden}
+.deal-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px}
+.dc-1::after{background:var(--green)}
+.dc-2::after{background:#1a5a9a}
+.dc-3::after{background:var(--gold)}
+.dc-4::after{background:#6a1a9a}
+.dc-5::after{background:#006a4a}
+.dc-6::after{background:#5a4a00}
+.deal-card:hover{border-color:var(--green);box-shadow:0 8px 30px rgba(0,0,0,0.08);transform:translateY(-2px)}
 .deal-top{display:flex;align-items:center;justify-content:space-between}
-.deal-emoji{font-size:1.5rem}
-.deal-comm{font-family:var(--font-head);font-size:1.4rem;font-weight:800;letter-spacing:-0.03em}
-.dc-teal{color:var(--teal)}
-.dc-amber{color:#ffa726}
-.dc-rose{color:#f48fb1}
-.deal-type{font-size:0.65rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#64748b}
-.deal-title{font-family:var(--font-head);font-size:0.95rem;font-weight:700;color:#e2e8f0;line-height:1.3}
-.deal-desc{font-size:0.78rem;color:#64748b;line-height:1.6;flex:1}
-.deal-footer{display:flex;align-items:center;justify-content:space-between;padding-top:0.75rem;border-top:1px solid #2d3f5e}
-.deal-badge{font-size:0.62rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:0.2rem 0.6rem;border-radius:100px;background:#0f1f3d;color:#64748b}
-.deal-cta{font-size:0.75rem;color:#64748b;transition:color 0.2s}
-.deal-card:hover .deal-cta{color:var(--teal)}
+.deal-emoji{font-size:1.75rem}
+.deal-comm{font-family:var(--font-head);font-size:1.6rem;letter-spacing:-0.04em}
+.dc-green{color:var(--green)}
+.dc-navy{color:var(--navy-mid)}
+.dc-gold{color:var(--gold)}
+.deal-type{font-size:0.65rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted)}
+.deal-title{font-family:var(--font-head);font-size:1rem;color:var(--navy);line-height:1.3;letter-spacing:-0.01em}
+.deal-desc{font-size:0.8rem;color:var(--muted);line-height:1.65;font-weight:300;flex:1}
+.deal-foot{display:flex;align-items:center;justify-content:space-between;padding-top:0.85rem;border-top:1px solid var(--border)}
+.deal-badge{font-size:0.62rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:0.25rem 0.65rem;border-radius:100px}
+.db-green{background:var(--green-pale);color:var(--green)}
+.db-navy{background:#e8eef5;color:#1a3a6a}
+.db-gold{background:var(--gold-light);color:var(--gold)}
+.deal-cta{font-size:0.75rem;font-weight:600;color:var(--green);transition:text-decoration 0.2s}
+.deal-card:hover .deal-cta{text-decoration:underline}
 
-/* WELLNESS BANNER */
-.wellness-banner{background:linear-gradient(135deg,#1b5e20,#2e7d32);padding:3rem 2rem;border-radius:20px;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
-.wb-title{font-family:var(--font-head);font-size:1.8rem;font-weight:800;color:#fff;letter-spacing:-0.02em;margin-bottom:0.75rem;line-height:1.2}
-.wb-sub{font-size:0.9rem;color:rgba(255,255,255,0.75);font-weight:300;line-height:1.7}
-.wb-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-.wb-stat{background:rgba(255,255,255,0.1);border-radius:12px;padding:1rem 1.25rem;border:1px solid rgba(255,255,255,0.15)}
-.wb-stat-n{font-family:var(--font-head);font-size:1.5rem;color:#fff;font-weight:800;letter-spacing:-0.03em;margin-bottom:0.2rem}
-.wb-stat-l{font-size:0.68rem;color:rgba(255,255,255,0.6);font-weight:500;letter-spacing:0.08em;text-transform:uppercase}
-
-/* BUDGET SECTION */
-.budget-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.25rem}
-.budget-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;text-decoration:none;color:var(--text);transition:box-shadow 0.2s,transform 0.2s;display:flex;flex-direction:column;gap:0.6rem}
-.budget-card:hover{box-shadow:0 8px 30px rgba(0,0,0,0.08);transform:translateY(-2px)}
-.budget-icon{font-size:1.75rem}
-.budget-title{font-family:var(--font-head);font-size:1rem;font-weight:700;color:var(--navy);letter-spacing:-0.02em;line-height:1.25}
-.budget-desc{font-size:0.78rem;color:var(--muted);line-height:1.6;flex:1}
-.budget-tag{font-size:0.65rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--amber);margin-top:auto}
+/* TRUST SECTION */
+.trust-section{background:var(--green);padding:3.5rem 0}
+.trust-inner{max-width:1200px;margin:0 auto;padding:0 2rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:3rem;align-items:center}
+.trust-title{font-family:var(--font-head);font-size:1.8rem;color:#fff;letter-spacing:-0.02em;line-height:1.2;margin-bottom:0.75rem}
+.trust-sub{font-size:0.88rem;color:rgba(255,255,255,0.75);font-weight:300;line-height:1.7}
+.trust-points{display:flex;flex-direction:column;gap:1rem}
+.trust-point{display:flex;align-items:flex-start;gap:0.75rem}
+.tp-icon{width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:0.9rem;flex-shrink:0;margin-top:1px}
+.tp-text{font-size:0.85rem;color:rgba(255,255,255,0.85);line-height:1.5;font-weight:300}
+.tp-text strong{color:#fff;font-weight:600;display:block;margin-bottom:1px;font-size:0.88rem}
 
 /* NEWSLETTER */
-.newsletter-wrap{background:var(--card);border:2px solid var(--border);border-radius:20px;padding:3rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;margin:4rem 0}
-.nl-eyebrow{font-size:0.7rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:var(--teal);margin-bottom:0.5rem}
-.nl-title{font-family:var(--font-head);font-size:1.75rem;font-weight:800;color:var(--navy);letter-spacing:-0.03em;line-height:1.15;margin-bottom:0.75rem}
-.nl-sub{font-size:0.88rem;color:var(--muted);font-weight:300;line-height:1.7}
-.nl-form{display:flex;flex-direction:column;gap:0.75rem}
-.nl-input-row{display:flex;gap:0.75rem}
-.nl-form input{flex:1;background:var(--bg);border:1.5px solid var(--border);border-radius:8px;padding:0.85rem 1.25rem;font-family:var(--font-body);font-size:0.88rem;color:var(--text);outline:none;transition:border-color 0.2s}
-.nl-form input:focus{border-color:var(--teal)}
-.nl-form input::placeholder{color:#aaa}
-.nl-form button{background:var(--navy);color:#fff;border:none;border-radius:8px;padding:0.85rem 1.75rem;font-family:var(--font-body);font-size:0.85rem;font-weight:600;cursor:pointer;white-space:nowrap;transition:background 0.2s;letter-spacing:0.03em}
-.nl-form button:hover{background:var(--teal)}
-.nl-note{font-size:0.7rem;color:#aaa}
-.nl-topics{display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.5rem}
-.nl-topic{font-size:0.68rem;font-weight:600;padding:0.25rem 0.65rem;border-radius:100px;border:1px solid var(--border);color:var(--muted)}
+.nl-section{padding:5rem 0;background:var(--bg)}
+.nl-box{background:var(--navy);border-radius:24px;padding:4rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;max-width:1200px;margin:0 auto}
+.nl-eyebrow{font-size:0.68rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:#4db88a;margin-bottom:0.75rem}
+.nl-title{font-family:var(--font-head);font-size:2.2rem;color:#fff;letter-spacing:-0.03em;line-height:1.1;margin-bottom:1rem}
+.nl-title em{font-style:italic;color:#4db88a}
+.nl-sub{font-size:0.9rem;color:#8aa8c4;font-weight:300;line-height:1.75}
+.nl-benefits{display:flex;flex-direction:column;gap:0.6rem;margin-top:1.5rem}
+.nl-benefit{display:flex;align-items:center;gap:0.6rem;font-size:0.82rem;color:#8aa8c4}
+.nl-benefit::before{content:'✓';color:#4db88a;font-weight:700;font-size:0.75rem}
+.nl-right{}
+.nl-form{display:flex;flex-direction:column;gap:0.85rem}
+.nl-form input{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:0.9rem 1.25rem;font-family:var(--font-body);font-size:0.9rem;color:#fff;outline:none;transition:border-color 0.2s}
+.nl-form input:focus{border-color:#4db88a}
+.nl-form input::placeholder{color:#4a6a8a}
+.nl-form button{background:var(--green);color:#fff;border:none;border-radius:10px;padding:1rem;font-family:var(--font-body);font-size:0.9rem;font-weight:600;cursor:pointer;transition:background 0.2s;letter-spacing:0.03em}
+.nl-form button:hover{background:var(--green-light)}
+.nl-note{font-size:0.7rem;color:#4a6a8a;text-align:center}
 
 /* FOOTER */
-.footer-top{background:var(--navy);padding:4rem 2rem 2rem}
-.footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
-.footer-brand .logo{color:#fff;font-size:1.4rem}
-.footer-brand .logo em{color:var(--teal)}
-.footer-brand p{font-size:0.82rem;color:#64748b;margin-top:0.75rem;line-height:1.7;max-width:220px}
-.footer-col h4{font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#64748b;margin-bottom:1rem}
-.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:0.6rem}
-.footer-col a{font-size:0.82rem;color:#94a3b8;text-decoration:none;transition:color 0.2s}
+.footer-main{background:var(--navy);border-top:1px solid #1a3a5c;padding:4rem 2rem 2rem}
+.footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2.5fr 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid #1a3a5c}
+.footer-brand .logo-main{color:#fff;font-size:1.5rem}
+.footer-brand .logo-main em{color:#4db88a}
+.footer-brand p{font-size:0.82rem;color:#4a6a8a;line-height:1.7;margin-top:0.75rem;max-width:240px}
+.footer-col h4{font-size:0.68rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:#4a6a8a;margin-bottom:1.25rem}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:0.65rem}
+.footer-col a{font-size:0.82rem;color:#7a9cbf;text-decoration:none;transition:color 0.2s}
 .footer-col a:hover{color:#fff}
-.footer-bottom{max-width:1200px;margin:0 auto;padding-top:1.5rem;border-top:1px solid #1e2f4a;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
-.footer-copy{font-size:0.75rem;color:#475569}
+.footer-bottom{max-width:1200px;margin:0 auto;padding-top:2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.footer-copy{font-size:0.75rem;color:#2a4a6a}
 .footer-legal{display:flex;gap:1.5rem}
-.footer-legal a{font-size:0.75rem;color:#475569;text-decoration:none;transition:color 0.2s}
-.footer-legal a:hover{color:#94a3b8}
-.disclaimer-bar{background:#0a1628;padding:0.85rem 2rem;font-size:0.68rem;color:#334155;text-align:center;line-height:1.6}
+.footer-legal a{font-size:0.75rem;color:#2a4a6a;text-decoration:none;transition:color 0.2s}
+.footer-legal a:hover{color:#7a9cbf}
+.disclaimer{background:#08131f;padding:1rem 2rem;font-size:0.68rem;color:#1e3a5a;text-align:center;line-height:1.7}
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
@@ -224,26 +244,27 @@ nav{background:var(--card);border-bottom:2px solid var(--border);padding:0 2rem;
 <body>
 
 <div class="top-bar">
-  <span class="top-bar-left">Tuesday, April 21, 2026 · Independent Reviews You Can Trust</span>
-  <div class="top-bar-right">
+  <span class="top-bar-date">Wednesday, April 22, 2026 &nbsp;·&nbsp; Independent Financial Guidance</span>
+  <div class="top-bar-links">
     <a href="#">About</a>
     <a href="#">Affiliate Disclosure</a>
-    <a href="#">Newsletter</a>
     <a href="#">Contact</a>
   </div>
 </div>
 
 <nav>
   <div class="nav-inner">
-    <a href="#" class="logo">SmartLife<em>Review</em><small>Tech · AI · Budgeting · Wellness</small></a>
-    <ul class="nav-cats">
-      <li><a href="#tech" class="active">Tech</a></li>
-      <li><a href="#ai">AI</a></li>
+    <a href="#" class="logo">
+      <span class="logo-main">Income<em>Lift</em></span>
+      <span class="logo-tag">Make Money · Save Money · Build Wealth</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#earn">Earn Online</a></li>
+      <li><a href="#side">Side Hustles</a></li>
       <li><a href="#budget">Budgeting</a></li>
-      <li><a href="#wellness">Wellness</a></li>
       <li><a href="#deals">Partner Deals</a></li>
+      <li><a href="#newsletter" class="nav-cta">Free Newsletter</a></li>
     </ul>
-    <a href="#newsletter" class="nav-subscribe">Subscribe Free</a>
   </div>
 </nav>
 
@@ -251,41 +272,41 @@ nav{background:var(--card);border-bottom:2px solid var(--border);padding:0 2rem;
 <section class="hero">
   <div class="hero-inner">
     <div>
-      <div class="hero-eyebrow">Independent Reviews & Guides</div>
-      <h1>Live Smarter.<br><em>Every</em> Single Day.</h1>
-      <p class="hero-sub">Honest guides on tech, AI tools, home budgeting, and wellness — everything you need to make smarter decisions and live better in 2026.</p>
-      <div class="hero-btns">
-        <a href="#articles" class="btn-primary">Browse Articles</a>
-        <a href="#deals" class="btn-ghost">Partner Deals →</a>
+      <div class="hero-eyebrow">Your Financial Guide for 2026</div>
+      <h1>Earn More.<br>Save More.<br><em>Live Better.</em></h1>
+      <p class="hero-sub">Honest guides on making money online, side hustles, affiliate marketing, and budgeting — written for real people who want real results.</p>
+      <div class="hero-actions">
+        <a href="#earn" class="btn-green">Start Earning Today</a>
+        <a href="#deals" class="btn-outline-white">Partner Deals →</a>
       </div>
     </div>
     <div class="hero-right">
-      <div class="hero-pill">
-        <div class="hero-pill-icon hpi-tech">💻</div>
-        <div class="hero-pill-text">
-          <div class="hero-pill-label">Tech</div>
-          <div class="hero-pill-title">Best laptops, phones & gadgets reviewed honestly</div>
+      <div class="hero-card">
+        <div class="hc-icon hci-1">💰</div>
+        <div class="hc-text">
+          <div class="hc-label">Affiliate Marketing</div>
+          <div class="hc-title">How to earn $500–$2,000/month recommending products you already use</div>
         </div>
       </div>
-      <div class="hero-pill">
-        <div class="hero-pill-icon hpi-ai">🤖</div>
-        <div class="hero-pill-text">
-          <div class="hero-pill-label">AI</div>
-          <div class="hero-pill-title">AI tools that actually save you time & money</div>
+      <div class="hero-card">
+        <div class="hc-icon hci-2">📊</div>
+        <div class="hc-text">
+          <div class="hc-label">Budgeting</div>
+          <div class="hc-title">12 proven ways to save $500 this month without cutting the things you love</div>
         </div>
       </div>
-      <div class="hero-pill">
-        <div class="hero-pill-icon hpi-budget">💰</div>
-        <div class="hero-pill-text">
-          <div class="hero-pill-label">Budgeting</div>
-          <div class="hero-pill-title">Real strategies to save more & earn on the side</div>
+      <div class="hero-card">
+        <div class="hc-icon hci-3">🤖</div>
+        <div class="hc-text">
+          <div class="hc-label">AI & Side Income</div>
+          <div class="hc-title">The best AI tools in 2026 that help you work faster and earn more online</div>
         </div>
       </div>
-      <div class="hero-pill">
-        <div class="hero-pill-icon hpi-wellness">🌿</div>
-        <div class="hero-pill-text">
-          <div class="hero-pill-label">Wellness</div>
-          <div class="hero-pill-title">Managing diabetes, nutrition & healthy living guides</div>
+      <div class="hero-card">
+        <div class="hc-icon hci-4">📈</div>
+        <div class="hc-text">
+          <div class="hc-label">Investing & Crypto</div>
+          <div class="hc-title">Beginner's guide to crypto, investing, and building long-term wealth</div>
         </div>
       </div>
     </div>
@@ -295,324 +316,310 @@ nav{background:var(--card);border-bottom:2px solid var(--border);padding:0 2rem;
 <!-- TICKER -->
 <div class="ticker">
   <div class="ticker-inner">
-    <span class="ticker-item">Best Laptops 2026</span>
-    <span class="ticker-item">AI Tools That Work</span>
-    <span class="ticker-item">Diabetes Management Tips</span>
-    <span class="ticker-item">Home Budget Hacks</span>
-    <span class="ticker-item">Make Money Online</span>
-    <span class="ticker-item">VPN Guide for Beginners</span>
+    <span class="ticker-item">Affiliate Marketing Guide</span>
+    <span class="ticker-item">Save $500 This Month</span>
+    <span class="ticker-item">Best AI Tools 2026</span>
+    <span class="ticker-item">AZ Code Review</span>
     <span class="ticker-item">Crypto for Beginners</span>
-    <span class="ticker-item">Healthy Living on a Budget</span>
-    <span class="ticker-item">Best Laptops 2026</span>
-    <span class="ticker-item">AI Tools That Work</span>
-    <span class="ticker-item">Diabetes Management Tips</span>
-    <span class="ticker-item">Home Budget Hacks</span>
-    <span class="ticker-item">Make Money Online</span>
-    <span class="ticker-item">VPN Guide for Beginners</span>
+    <span class="ticker-item">Make Money From Home</span>
+    <span class="ticker-item">Side Hustle Ideas</span>
+    <span class="ticker-item">VPN Guide</span>
+    <span class="ticker-item">Affiliate Marketing Guide</span>
+    <span class="ticker-item">Save $500 This Month</span>
+    <span class="ticker-item">Best AI Tools 2026</span>
+    <span class="ticker-item">AZ Code Review</span>
     <span class="ticker-item">Crypto for Beginners</span>
-    <span class="ticker-item">Healthy Living on a Budget</span>
+    <span class="ticker-item">Make Money From Home</span>
+    <span class="ticker-item">Side Hustle Ideas</span>
+    <span class="ticker-item">VPN Guide</span>
   </div>
 </div>
 
-<!-- CATEGORY STRIP -->
-<div class="page-wrap">
-  <div class="section">
-    <div class="cat-strip">
-      <a href="#tech" class="cat-pill cp-tech">💻 Tech Reviews</a>
-      <a href="#ai" class="cat-pill cp-ai">🤖 AI & Productivity</a>
-      <a href="#budget" class="cat-pill cp-budget">💰 Home Budgeting</a>
-      <a href="#wellness" class="cat-pill cp-wellness">🌿 Wellness & Health</a>
+<!-- FEATURED ARTICLES -->
+<div class="main-wrap">
+  <div class="featured-wrap" id="earn">
+    <div class="sec-head">
+      <div class="sec-title">Featured Articles</div>
+      <a href="#" class="sec-link">All articles →</a>
     </div>
-
-    <!-- MAIN ARTICLES -->
-    <div id="articles">
-      <div class="section-header">
-        <div class="section-title">Latest Articles</div>
-        <a href="#" class="section-link">View all →</a>
-      </div>
-      <div class="main-grid" id="tech">
-        <a href="laptops-under-1000.html" class="featured-card">
-          <div class="featured-img fi-tech">💻</div>
-          <div class="featured-body">
-            <div class="article-tag at-tech">💻 Tech Review</div>
-            <div class="article-title">Best Laptops Under $1000 in 2026 — The Only Buying Guide You Need</div>
-            <div class="article-desc">We tested the MacBook Air M3, Dell XPS 13, and Lenovo ThinkPad X1 Carbon. Here's which one is actually worth your money and which ones to skip entirely.</div>
-            <div class="article-footer">
-              <div class="article-meta"><span>12 min read</span><span class="meta-dot"></span><span>April 2026</span><span class="meta-dot"></span><span>Amazon</span></div>
-              <a class="read-more">Read article →</a>
-            </div>
+    <div class="featured-grid">
+      <a href="what-is-affiliate-marketing.html" class="feat-card">
+        <div class="feat-img fi-earn">💰</div>
+        <div class="feat-body">
+          <div class="art-tag tag-earn">💰 Affiliate Marketing</div>
+          <div class="art-title">What is Affiliate Marketing? The Complete Beginner Guide for 2026</div>
+          <div class="art-desc">Everything you need to know to start earning commissions online — how it works, how to get started, and how to make your first sale within 60 days. No experience required.</div>
+          <div class="art-foot">
+            <div class="art-meta"><span>9 min read</span><span>·</span><span>April 2026</span><span>·</span><span>Digistore24 75%</span></div>
+            <a class="read-btn">Read →</a>
+          </div>
+        </div>
+      </a>
+      <div class="side-list">
+        <a href="az-code-review.html" class="side-art">
+          <div class="side-art-color sac-earn"></div>
+          <div class="side-art-body">
+            <div class="art-tag tag-review">⭐ Review</div>
+            <div class="art-title">The AZ Code Review — Honest Take From Someone Who Tested It</div>
+            <div class="side-art-meta">7 min · Digistore24 75%</div>
           </div>
         </a>
-        <div class="sidebar-cards">
-          <a href="what-is-affiliate-marketing.html" class="side-card">
-            <div class="side-card-color sc-budget"></div>
-            <div class="side-card-body">
-              <div class="article-tag at-budget">💰 Make Money</div>
-              <div class="article-title">What is Affiliate Marketing? Complete Beginner Guide 2026</div>
-              <div class="side-card-meta">9 min read · Digistore24 75%</div>
-            </div>
-          </a>
-          <a href="vpn-guide-beginners.html" class="side-card">
-            <div class="side-card-color sc-tech"></div>
-            <div class="side-card-body">
-              <div class="article-tag at-tech">💻 Privacy</div>
-              <div class="article-title">VPN Guide for Beginners — Everything You Need to Know</div>
-              <div class="side-card-meta">8 min read · Both Networks</div>
-            </div>
-          </a>
-          <a href="az-code-review.html" class="side-card">
-            <div class="side-card-color sc-budget"></div>
-            <div class="side-card-body">
-              <div class="article-tag at-budget">💰 Review</div>
-              <div class="article-title">The AZ Code Review 2026 — Honest Take From Someone Who Tested It</div>
-              <div class="side-card-meta">7 min read · Digistore24 75%</div>
-            </div>
-          </a>
-          <a href="work-from-home-tech-guide.html" class="side-card">
-            <div class="side-card-color sc-tech"></div>
-            <div class="side-card-body">
-              <div class="article-tag at-both">🏠 WFH Guide</div>
-              <div class="article-title">Best Work From Home Tech Setup — Everything You Need in 2026</div>
-              <div class="side-card-meta">10 min read · Both Networks</div>
-            </div>
-          </a>
-        </div>
+        <a href="save-500-this-month.html" class="side-art">
+          <div class="side-art-color sac-budget"></div>
+          <div class="side-art-body">
+            <div class="art-tag tag-budget">💵 Budgeting</div>
+            <div class="art-title">Save $500 This Month — 12 Real Budget Tips That Actually Work</div>
+            <div class="side-art-meta">8 min · Amazon + Digistore24</div>
+          </div>
+        </a>
+        <a href="best-ai-tools-2026.html" class="side-art">
+          <div class="side-art-color sac-side"></div>
+          <div class="side-art-body">
+            <div class="art-tag tag-ai">🤖 AI Tools</div>
+            <div class="art-title">Best AI Tools in 2026 — Tested & Ranked for Real People</div>
+            <div class="side-art-meta">9 min · Digistore24 65%</div>
+          </div>
+        </a>
+        <a href="vpn-guide-beginners.html" class="side-art">
+          <div class="side-art-color sac-crypto"></div>
+          <div class="side-art-body">
+            <div class="art-tag tag-side">🔐 Privacy</div>
+            <div class="art-title">VPN Guide for Beginners — Everything You Need to Know in 2026</div>
+            <div class="side-art-meta">8 min · Both Networks</div>
+          </div>
+        </a>
       </div>
     </div>
   </div>
 </div>
 
-<!-- FOUR NICHES -->
-<div style="background:var(--light);padding:4rem 0">
-  <div class="page-wrap">
-    <div class="section-header">
-      <div class="section-title">What We Cover</div>
-      <a href="#" class="section-link">All categories →</a>
-    </div>
-    <div class="niches-grid">
-      <a href="#tech" class="niche-card nc-tech">
-        <div class="niche-icon">💻</div>
-        <div class="niche-title">Tech Reviews</div>
-        <div class="niche-desc">Honest reviews of laptops, phones, headphones, smart home gear and more — all linked to Amazon.</div>
-        <div class="niche-links">
-          <span class="niche-link">Best laptops under $1000</span>
-          <span class="niche-link">Top wireless earbuds</span>
-          <span class="niche-link">Smart home setup guide</span>
-        </div>
-        <div class="niche-count">48+ reviews · Amazon</div>
-      </a>
-      <a href="#ai" class="niche-card nc-ai" id="ai">
-        <div class="niche-icon">🤖</div>
-        <div class="niche-title">AI & Productivity</div>
-        <div class="niche-desc">Guides on using AI tools to work faster, earn more, and automate your life. Courses via Digistore24.</div>
-        <div class="niche-links">
-          <span class="niche-link">Best AI tools 2026</span>
-          <span class="niche-link">Make money with AI</span>
-          <span class="niche-link">AI automation for beginners</span>
-        </div>
-        <div class="niche-count">18+ guides · Digistore24</div>
-      </a>
-      <a href="#budget" class="niche-card nc-budget" id="budget">
-        <div class="niche-icon">💰</div>
-        <div class="niche-title">Home Budgeting</div>
-        <div class="niche-desc">Practical money guides — saving, budgeting, side hustles, and affiliate income strategies for real people.</div>
-        <div class="niche-links">
-          <span class="niche-link">How to start affiliate marketing</span>
-          <span class="niche-link">Best side hustles 2026</span>
-          <span class="niche-link">Save $500 this month</span>
-        </div>
-        <div class="niche-count">14+ guides · Both Networks</div>
-      </a>
-      <a href="#wellness" class="niche-card nc-wellness" id="wellness">
-        <div class="niche-icon">🌿</div>
-        <div class="niche-title">Wellness & Health</div>
-        <div class="niche-desc">Practical health guides covering diabetes management, nutrition, fitness and healthy living on a budget.</div>
-        <div class="niche-links">
-          <span class="niche-link">Managing diabetes naturally</span>
-          <span class="niche-link">Healthy eating on a budget</span>
-          <span class="niche-link">Best health trackers reviewed</span>
-        </div>
-        <div class="niche-count">12+ guides · Amazon + DS24</div>
-      </a>
-    </div>
+<!-- NUMBERS -->
+<div class="numbers-strip">
+  <div class="numbers-inner">
+    <div class="num-cell"><div class="num-val"><em>75%</em></div><div class="num-label">Top Commission Rate</div></div>
+    <div class="num-cell"><div class="num-val">$<em>0</em></div><div class="num-label">Cost to Start</div></div>
+    <div class="num-cell"><div class="num-val"><em>60</em>d</div><div class="num-label">To First Commission</div></div>
+    <div class="num-cell"><div class="num-val"><em>2</em>x</div><div class="num-label">Networks Combined</div></div>
   </div>
 </div>
 
-<!-- WELLNESS BANNER -->
-<div class="page-wrap">
-  <div class="section">
-    <div class="wellness-banner">
-      <div>
-        <div style="font-size:0.7rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:0.75rem">Wellness & Health</div>
-        <div class="wb-title">Managing Diabetes<br>& Living Well in 2026</div>
-        <p class="wb-sub">Practical guides on blood sugar management, healthy eating, exercise, and the best health tech tools — written in plain language for real people.</p>
-        <div style="margin-top:1.5rem">
-          <a href="#" class="btn-primary" style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3)">Read Wellness Guides →</a>
-        </div>
-      </div>
-      <div class="wb-stats">
-        <div class="wb-stat"><div class="wb-stat-n">12+</div><div class="wb-stat-l">Health Guides</div></div>
-        <div class="wb-stat"><div class="wb-stat-n">Free</div><div class="wb-stat-l">Always Free to Read</div></div>
-        <div class="wb-stat"><div class="wb-stat-n">Plain</div><div class="wb-stat-l">No Medical Jargon</div></div>
-        <div class="wb-stat"><div class="wb-stat-n">Real</div><div class="wb-stat-l">Practical Advice</div></div>
-      </div>
+<!-- CATEGORIES -->
+<div class="cats-section" id="side">
+  <div class="main-wrap">
+    <div class="sec-head">
+      <div class="sec-title">Browse by Topic</div>
+      <a href="#" class="sec-link">All topics →</a>
     </div>
-  </div>
-</div>
-
-<!-- BUDGETING -->
-<div class="page-wrap">
-  <div class="section-header">
-    <div class="section-title">Home Budgeting & Income</div>
-    <a href="#" class="section-link">All money guides →</a>
-  </div>
-  <div class="budget-grid">
-    <a href="what-is-affiliate-marketing.html" class="budget-card">
-      <div class="budget-icon">📊</div>
-      <div class="budget-title">What is Affiliate Marketing? Complete Beginner Guide</div>
-      <div class="budget-desc">The simplest way to earn money online explained — no experience needed, free to start, works from home.</div>
-      <div class="budget-tag">Digistore24 · 75% Commission</div>
-    </a>
-    <a href="az-code-review.html" class="budget-card">
-      <div class="budget-icon">🛒</div>
-      <div class="budget-title">The AZ Code Review — Earn With Amazon in 2026</div>
-      <div class="budget-desc">Honest review of the most popular Amazon affiliate training program. Is it worth $37? We tell you the truth.</div>
-      <div class="budget-tag">Digistore24 · 75% Commission</div>
-    </a>
-    <a href="#" class="budget-card">
-      <div class="budget-icon">💡</div>
-      <div class="budget-title">Save $500 This Month — 12 Practical Home Budget Tips</div>
-      <div class="budget-desc">Real, actionable budgeting strategies that work for families, singles, and everyone in between. No fluff.</div>
-      <div class="budget-tag">Coming Soon</div>
-    </a>
+    <div class="cats-grid">
+      <a href="what-is-affiliate-marketing.html" class="cat-card cc-earn">
+        <div class="cat-icon">💰</div>
+        <div class="cat-title">Affiliate Marketing</div>
+        <div class="cat-desc">Step-by-step guides to earning commissions with Amazon and Digistore24 — the highest paying affiliate programs available.</div>
+        <div class="cat-arts">
+          <span class="cat-art">What is affiliate marketing?</span>
+          <span class="cat-art">The AZ Code review</span>
+          <span class="cat-art">How to get your first sale</span>
+        </div>
+        <div class="cat-count">8 guides · Earn up to 75%</div>
+      </a>
+      <a href="best-ai-tools-2026.html" class="cat-card cc-side">
+        <div class="cat-icon">🤖</div>
+        <div class="cat-title">AI & Side Income</div>
+        <div class="cat-desc">How to use AI tools to work faster, create content, grow on YouTube, and build side income streams in 2026.</div>
+        <div class="cat-arts">
+          <span class="cat-art">Best AI tools 2026 — ranked</span>
+          <span class="cat-art">Make money with AI tools</span>
+          <span class="cat-art">TubeMagic review</span>
+        </div>
+        <div class="cat-count">6 guides · Digistore24</div>
+      </a>
+      <a href="save-500-this-month.html" class="cat-card cc-budget" id="budget">
+        <div class="cat-icon">📊</div>
+        <div class="cat-title">Budgeting & Saving</div>
+        <div class="cat-desc">Practical money guides for real people — cutting expenses, saving more, and building financial security on any income.</div>
+        <div class="cat-arts">
+          <span class="cat-art">Save $500 this month</span>
+          <span class="cat-art">12 budget hacks that work</span>
+          <span class="cat-art">Best budgeting apps reviewed</span>
+        </div>
+        <div class="cat-count">5 guides · Both Networks</div>
+      </a>
+      <a href="#" class="cat-card cc-crypto">
+        <div class="cat-icon">📈</div>
+        <div class="cat-title">Crypto & Investing</div>
+        <div class="cat-desc">Beginner-friendly guides to cryptocurrency, trading tools, and building long-term wealth through smart investing decisions.</div>
+        <div class="cat-arts">
+          <span class="cat-art">Crypto for beginners 2026</span>
+          <span class="cat-art">Intelligent Crypto VIP review</span>
+          <span class="cat-art">Tick Data Visualizer review</span>
+        </div>
+        <div class="cat-count">4 guides · Digistore24 60%</div>
+      </a>
+    </div>
   </div>
 </div>
 
 <!-- PARTNER DEALS -->
-<div class="deals-strip" id="deals">
-  <div class="page-wrap">
-    <div class="section-header" style="border-color:#1e2f4a">
-      <div class="section-title" style="color:#fff">Partner Deals</div>
-      <a href="#" class="section-link">All deals →</a>
+<div class="main-wrap">
+  <div class="deals-section" id="deals">
+    <div class="sec-head">
+      <div class="sec-title">Partner Deals</div>
+      <a href="#" class="sec-link">All deals →</a>
     </div>
     <div class="deals-grid">
-      <a href="https://www.theazcode.com#aff=eddieh367e5fb" class="deal-card">
-        <div class="deal-top"><div class="deal-emoji">💰</div><div class="deal-comm dc-teal">75%</div></div>
-        <div class="deal-type">Course · Make Money Online</div>
+      <a href="https://www.theazcode.com#aff=eddieh367e5fb" class="deal-card dc-1">
+        <div class="deal-top"><div class="deal-emoji">💰</div><div class="deal-comm dc-green">75%</div></div>
+        <div class="deal-type">Course · Affiliate Marketing</div>
         <div class="deal-title">The AZ Code — Amazon Earnings Blueprint</div>
-        <div class="deal-desc">Step-by-step Amazon affiliate training. Perfect for beginners wanting to earn from home.</div>
-        <div class="deal-footer"><span class="deal-badge">Best Commission</span><span class="deal-cta">Get started →</span></div>
+        <div class="deal-desc">The clearest step-by-step system for earning with Amazon affiliate marketing. Our top recommendation for beginners. 60-day money back guarantee.</div>
+        <div class="deal-foot"><span class="deal-badge db-green">Best Commission</span><span class="deal-cta">Get started →</span></div>
       </a>
-      <a href="https://tubemagic.com/ds#aff=eddieh367e5fb" class="deal-card">
-        <div class="deal-top"><div class="deal-emoji">🎬</div><div class="deal-comm dc-amber">65%</div></div>
-        <div class="deal-type">Tool · YouTube Growth</div>
+      <a href="https://tubemagic.com/ds#aff=eddieh367e5fb" class="deal-card dc-2">
+        <div class="deal-top"><div class="deal-emoji">🎬</div><div class="deal-comm dc-navy">65%</div></div>
+        <div class="deal-type">Tool · YouTube & AI</div>
         <div class="deal-title">TubeMagic — AI YouTube Growth Tool</div>
-        <div class="deal-desc">AI-powered tool for growing a YouTube channel. Ideal for creators in tech, wellness, or budgeting niches.</div>
-        <div class="deal-footer"><span class="deal-badge">Top Seller</span><span class="deal-cta">Get started →</span></div>
+        <div class="deal-desc">AI-powered tool that optimizes your YouTube titles, descriptions and tags automatically. Ideal for finance and side hustle content creators.</div>
+        <div class="deal-foot"><span class="deal-badge db-navy">Top Seller</span><span class="deal-cta">Get started →</span></div>
       </a>
-      <a href="https://www.digistore24.com/redir/363385/eddieh367e5fb/" class="deal-card">
-        <div class="deal-top"><div class="deal-emoji">📈</div><div class="deal-comm dc-rose">60%</div></div>
+      <a href="https://www.digistore24.com/redir/363385/eddieh367e5fb/" class="deal-card dc-3">
+        <div class="deal-top"><div class="deal-emoji">📈</div><div class="deal-comm dc-gold">60%</div></div>
         <div class="deal-type">Course · Crypto & Finance</div>
         <div class="deal-title">Intelligent Cryptocurrency VIP</div>
-        <div class="deal-desc">Top-rated crypto training with low refund rates. Perfect for the budgeting and finance audience.</div>
-        <div class="deal-footer"><span class="deal-badge">Low Refunds</span><span class="deal-cta">Get started →</span></div>
+        <div class="deal-desc">Top-rated crypto training program with low refund rates and high earnings per click. Perfect for the finance and investing audience.</div>
+        <div class="deal-foot"><span class="deal-badge db-gold">Low Refunds</span><span class="deal-cta">Get started →</span></div>
       </a>
-      <a href="https://www.digistore24.com/redir/563094/eddieh367e5fb/" class="deal-card">
-        <div class="deal-top"><div class="deal-emoji">🎓</div><div class="deal-comm dc-teal">60%</div></div>
+      <a href="https://www.digistore24.com/redir/563094/eddieh367e5fb/" class="deal-card dc-4">
+        <div class="deal-top"><div class="deal-emoji">🎓</div><div class="deal-comm dc-green">60%</div></div>
         <div class="deal-type">Course · Freelancing</div>
         <div class="deal-title">Tech Freelancer Fast-Start Program</div>
-        <div class="deal-desc">Turn your tech skills into freelance income. Matches the work-from-home and tech audiences perfectly.</div>
-        <div class="deal-footer"><span class="deal-badge">Growing Niche</span><span class="deal-cta">Get started →</span></div>
+        <div class="deal-desc">Helps readers turn existing skills into freelance income. Strong match for the side hustle and make money online audience.</div>
+        <div class="deal-foot"><span class="deal-badge db-green">Growing Fast</span><span class="deal-cta">Get started →</span></div>
       </a>
-      <a href="https://www.checkout-ds24.com/redir/637251/eddieh367e5fb/" class="deal-card">
-        <div class="deal-top"><div class="deal-emoji">📊</div><div class="deal-comm dc-amber">55%</div></div>
+      <a href="https://www.checkout-ds24.com/redir/637251/eddieh367e5fb/" class="deal-card dc-5">
+        <div class="deal-top"><div class="deal-emoji">📊</div><div class="deal-comm dc-green">55%</div></div>
         <div class="deal-type">Tool · Trading & Data</div>
         <div class="deal-title">Tick Data Visualizer Pro</div>
-        <div class="deal-desc">Professional trading data tool for crypto and stock investors. Strong match for the finance audience.</div>
-        <div class="deal-footer"><span class="deal-badge">High Value</span><span class="deal-cta">Get started →</span></div>
+        <div class="deal-desc">Professional trading data visualization tool for crypto and stock market investors. High value product with strong conversion rates.</div>
+        <div class="deal-foot"><span class="deal-badge db-green">High Value</span><span class="deal-cta">Get started →</span></div>
       </a>
-      <a href="https://amzn.to/4mRmpPe" class="deal-card">
-        <div class="deal-top"><div class="deal-emoji">🎧</div><div class="deal-comm dc-teal">8%</div></div>
-        <div class="deal-type">Amazon · Audio</div>
-        <div class="deal-title">Sony WH-1000XM6 — Best Noise-Cancelling Headphones</div>
-        <div class="deal-desc">Our top headphone pick for remote workers and commuters. Best ANC at this price point.</div>
-        <div class="deal-footer"><span class="deal-badge">Amazon Pick</span><span class="deal-cta">View on Amazon →</span></div>
+      <a href="https://amzn.to/4e27hw2" class="deal-card dc-6">
+        <div class="deal-top"><div class="deal-emoji">💻</div><div class="deal-comm dc-gold">8%</div></div>
+        <div class="deal-type">Amazon · Laptops</div>
+        <div class="deal-title">MacBook Air M3 — Best Laptop for Side Hustlers</div>
+        <div class="deal-desc">The best laptop for running an online business, affiliate blog, or YouTube channel. Outstanding performance and battery life.</div>
+        <div class="deal-foot"><span class="deal-badge db-gold">Amazon Pick</span><span class="deal-cta">View on Amazon →</span></div>
       </a>
+    </div>
+  </div>
+</div>
+
+<!-- TRUST -->
+<div class="trust-section">
+  <div class="trust-inner">
+    <div>
+      <div class="trust-title">Why Trust IncomeLift?</div>
+      <p class="trust-sub">We only recommend products and strategies we have personally tested or thoroughly researched. Every affiliate link is disclosed. Every review is honest — including the negatives.</p>
+    </div>
+    <div class="trust-points">
+      <div class="trust-point">
+        <div class="tp-icon">✓</div>
+        <div class="tp-text"><strong>Fully Transparent</strong>All affiliate relationships are clearly disclosed on every page. We earn commissions — we never hide it.</div>
+      </div>
+      <div class="trust-point">
+        <div class="tp-icon">★</div>
+        <div class="tp-text"><strong>Honest Reviews</strong>We include real cons and genuine weaknesses. If a product is not worth it we say so — even if it pays high commissions.</div>
+      </div>
+      <div class="trust-point">
+        <div class="tp-icon">→</div>
+        <div class="tp-text"><strong>Actionable Advice</strong>Every guide ends with clear next steps. No fluff, no filler — just practical information you can act on today.</div>
+      </div>
+    </div>
+    <div class="trust-points">
+      <div class="trust-point">
+        <div class="tp-icon">$</div>
+        <div class="tp-text"><strong>Free to Read</strong>Every article on IncomeLift is completely free. No paywalls, no subscriptions required to access our guides.</div>
+      </div>
+      <div class="trust-point">
+        <div class="tp-icon">🔒</div>
+        <div class="tp-text"><strong>No Spam Ever</strong>Your email is never sold or shared. Our newsletter goes out once a week — unsubscribe any time with one click.</div>
+      </div>
+      <div class="trust-point">
+        <div class="tp-icon">↑</div>
+        <div class="tp-text"><strong>Updated Regularly</strong>We review and update our guides every quarter to make sure the information stays accurate and relevant.</div>
+      </div>
     </div>
   </div>
 </div>
 
 <!-- NEWSLETTER -->
-<div class="page-wrap">
-  <div class="newsletter-wrap" id="newsletter">
+<div class="nl-section" id="newsletter">
+  <div class="nl-box">
     <div>
       <div class="nl-eyebrow">Free Weekly Newsletter</div>
-      <div class="nl-title">Stay Smart.<br>Stay Informed.</div>
-      <p class="nl-sub">Join 12,000+ readers getting the best tech reviews, AI tips, budgeting strategies, and wellness guides every Tuesday — completely free.</p>
-      <div class="nl-topics">
-        <span class="nl-topic">💻 Tech</span>
-        <span class="nl-topic">🤖 AI</span>
-        <span class="nl-topic">💰 Budgeting</span>
-        <span class="nl-topic">🌿 Wellness</span>
+      <div class="nl-title">Get Smarter<br>About <em>Money</em><br>Every Tuesday</div>
+      <div class="nl-benefits">
+        <div class="nl-benefit">New earning opportunities and side hustle ideas</div>
+        <div class="nl-benefit">Honest affiliate product reviews and recommendations</div>
+        <div class="nl-benefit">Budgeting tips and money saving strategies</div>
+        <div class="nl-benefit">AI tools and tech that help you earn more</div>
       </div>
     </div>
-    <div>
+    <div class="nl-right">
       <div class="nl-form">
-        <div class="nl-input-row">
-          <input type="email" placeholder="your@email.com" />
-          <button type="button">Subscribe</button>
-        </div>
-        <p class="nl-note">No spam. Unsubscribe anytime. We cover all 4 topics in one weekly digest.</p>
+        <input type="text" placeholder="First name" />
+        <input type="email" placeholder="Email address" />
+        <button type="button">Subscribe Free →</button>
+        <p class="nl-note">Join 12,000+ readers · No spam · Unsubscribe anytime</p>
       </div>
     </div>
   </div>
 </div>
 
 <!-- FOOTER -->
-<div class="footer-top">
+<div class="footer-main">
   <div class="footer-grid">
     <div class="footer-brand">
-      <a href="#" class="logo" style="color:#fff">SmartLife<em style="color:#0097a7">Review</em></a>
-      <p>Independent reviews and guides covering tech, AI, home budgeting, and wellness — helping you live smarter every day.</p>
+      <div class="logo-main">Income<em style="color:#4db88a">Lift</em></div>
+      <p>Honest guides on making money online, side hustles, affiliate marketing, and budgeting — helping real people build better financial lives since 2026.</p>
     </div>
     <div class="footer-col">
-      <h4>Tech & AI</h4>
+      <h4>Earn Online</h4>
       <ul>
-        <li><a href="laptops-under-1000.html">Best Laptops 2026</a></li>
-        <li><a href="vpn-guide-beginners.html">VPN Guide</a></li>
-        <li><a href="work-from-home-tech-guide.html">WFH Tech Setup</a></li>
-        <li><a href="#">AI Tools Guide</a></li>
+        <li><a href="what-is-affiliate-marketing.html">Affiliate Marketing Guide</a></li>
+        <li><a href="az-code-review.html">AZ Code Review</a></li>
+        <li><a href="best-ai-tools-2026.html">Best AI Tools 2026</a></li>
+        <li><a href="work-from-home-tech-guide.html">Work From Home Guide</a></li>
       </ul>
     </div>
     <div class="footer-col">
-      <h4>Money & Wellness</h4>
+      <h4>Save Money</h4>
       <ul>
-        <li><a href="what-is-affiliate-marketing.html">Affiliate Marketing</a></li>
-        <li><a href="az-code-review.html">AZ Code Review</a></li>
-        <li><a href="#">Diabetes Guide</a></li>
-        <li><a href="#">Budget Tips</a></li>
+        <li><a href="save-500-this-month.html">Save $500 This Month</a></li>
+        <li><a href="vpn-guide-beginners.html">VPN Guide</a></li>
+        <li><a href="#">Crypto for Beginners</a></li>
+        <li><a href="#">Best Budgeting Apps</a></li>
       </ul>
     </div>
     <div class="footer-col">
       <h4>Company</h4>
       <ul>
-        <li><a href="#">About Us</a></li>
+        <li><a href="#">About IncomeLift</a></li>
         <li><a href="#">Affiliate Disclosure</a></li>
         <li><a href="#">Privacy Policy</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="#">Contact Us</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <span class="footer-copy">© 2026 SmartLife Review. All rights reserved.</span>
+    <span class="footer-copy">© 2026 IncomeLift. All rights reserved.</span>
     <div class="footer-legal">
       <a href="#">Privacy Policy</a>
-      <a href="#">Terms</a>
+      <a href="#">Terms of Use</a>
       <a href="#">Affiliate Disclosure</a>
     </div>
   </div>
 </div>
-<div class="disclaimer-bar">SmartLife Review is reader-supported. We earn commissions from Amazon Associates and Digistore24 when you purchase through our links — at no extra cost to you. Health content is for informational purposes only and is not medical advice. Always consult a healthcare professional for medical decisions.</div>
+<div class="disclaimer">IncomeLift is reader-supported. We earn commissions from Amazon Associates and Digistore24 when you purchase through our links — at no extra cost to you. All content is for informational purposes only and does not constitute financial advice. Always do your own research before making financial decisions.</div>
 
 </body>
 </html>
