@@ -9,7 +9,7 @@ const EXCLUDE = new Set(['.git', '.github', 'tests', 'scripts', 'node_modules', 
 const TAG_RE = /^[A-Za-z0-9][A-Za-z0-9_-]{0,60}-\d{2}$/;
 // Real href attributes only (preceded by whitespace, so data-href is ignored);
 // double-quoted, single-quoted or unquoted values.
-const HREF_RE = /(\shref\s*=\s*)(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+))/gi;
+const HREF_RE = /(\shref\s*=\s*)(?:"([^"]*)"|'([^']*)'|([^\s>]+))/gi;
 const valueOf = m => (m[2] !== undefined ? m[2] : m[3] !== undefined ? m[3] : m[4]);
 const BASE = 'https://eddieh367-create.github.io/voltpick/';
 
@@ -53,7 +53,8 @@ function rewriteHtml(html, tag, label = 'html') {
     u.searchParams.delete('tag');
     u.searchParams.append('tag', tag);
     count++;
-    return pre + '"' + encode(u.href) + '"';
+    const q = m[3] !== undefined ? "'" : '"';
+    return pre + q + encode(u.href) + q;
   });
   return { html: out, count };
 }
