@@ -118,3 +118,26 @@ test('changing only config retags nested fixture site; short links fail build', 
   fs.writeFileSync(path.join(root, 'guides/deep/s.html'), '<a href="https://amzn.to/zzz">');
   assert.throws(() => lib.build({ root, outDir: out, configFile: path.join(root, 'cfg.json') }), /short link/);
 });
+test('unquoted hrefs are rewritten and validated; data-href untouched', () => {
+  const src = '<a href=https://www.amazon.com/dp/U>u</a><a class=x href=https://amazon.com/dp/W?tag=wrong-20>w</a><div data-href="https://www.amazon.com/dp/D">d</div>';
+  const { html, count } = lib.rewriteHtml(src, 'voltpick-20');
+  assert.equal(count, 2);
+  assert.ok(html.includes('href="https://www.amazon.com/dp/U?tag=voltpick-20"'));
+  assert.ok(html.includes('href="https://amazon.com/dp/W?tag=voltpick-20"'));
+  assert.ok(html.includes('data-href="https://www.amazon.com/dp/D"'));
+  assert.deepEqual(lib.validateHtml(html, 'voltpick-20').errors, []);
+  assert.ok(lib.validateHtml('<a href=https://amazon.com/dp/W?tag=wrong-20>', 'voltpick-20').errors.some(e => /wrong-20/.test(e)));
+  assert.ok(lib.validateHtml('<a href=https://amazon.com/dp/W>', 'voltpick-20').errors.length > 0);
+  assert.equal(lib.validateHtml('<div data-href="https://amazon.com/dp/W">', 'voltpick-20').count, 0);
+  assert.equal(lib.rewriteHtml('<a href=/local.html data-href=x>', 'voltpick-20').html, '<a href=/local.html data-href=x>');
+});
+test('numeric entities decoded faithfully; unknown named entities fail closed', () => {
+  for (const amp of ['&#38;', '&#x26;', '&#X26;']) {
+    const { html } = lib.rewriteHtml('<a href="https://www.amazon.com/s?k=buds' + amp + 'tag=old-20' + amp + 'i=aps">', 'voltpick-20');
+    assert.ok(html.includes('href="https://www.amazon.com/s?k=buds&amp;i=aps&amp;tag=voltpick-20"'), html);
+    assert.equal(lib.validateHtml(html, 'voltpick-20').errors.length, 0);
+  }
+  assert.ok(lib.validateHtml('<a href="https://www.amazon.com/dp/A?tag=voltpick-20&#38;tag=old-20">', 'voltpick-20').errors.length > 0);
+  assert.throws(() => lib.rewriteHtml('<a href="https://www.amazon.com/s?k=a&quot;b">', 'voltpick-20'), /entity/);
+  assert.ok(lib.validateHtml('<a href="https://www.amazon.com/s?k=a&quot;b&amp;tag=voltpick-20">', 'voltpick-20').errors.length > 0);
+});

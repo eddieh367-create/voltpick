@@ -7,7 +7,10 @@ const path = require('node:path');
 const EXCLUDE = new Set(['.git', '.github', 'tests', 'scripts', 'node_modules', '_site',
   'package.json', 'package-lock.json', 'affiliate.config.json', '.gitignore']);
 const TAG_RE = /^[A-Za-z0-9][A-Za-z0-9_-]{0,60}-\d{2}$/;
-const HREF_RE = /(\bhref\s*=\s*)(["'])(.*?)\2/gis;
+// Real href attributes only (preceded by whitespace, so data-href is ignored);
+// double-quoted, single-quoted or unquoted values.
+const HREF_RE = /(\shref\s*=\s*)(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+))/gi;
+const valueOf = m => (m[2] !== undefined ? m[2] : m[3] !== undefined ? m[3] : m[4]);
 const BASE = 'https://eddieh367-create.github.io/voltpick/';
 
 function loadConfig(file) {
@@ -21,7 +24,13 @@ function loadConfig(file) {
   return { amazonAssociateTag: tag };
 }
 
-const decode = s => s.replace(/&amp;/gi, '&');
+function decode(s) {
+  return s.replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(parseInt(h, 16)))
+    .replace(/&#(\d+);/g, (_, d) => String.fromCodePoint(parseInt(d, 10)))
+    .replace(/&amp;/gi, '&');
+}
+// Named entities other than &amp; are not decoded; refuse them in Amazon links (fail closed).
+const hasOtherEntity = raw => /&(?!amp;|#\d+;|#x[0-9a-f]+;)[a-z][a-z0-9]*;/i.test(raw);
 const encode = s => s.replace(/&/g, '&amp;');
 function parse(raw) { try { return new URL(decode(raw.trim()), BASE); } catch (_) { return null; } }
 function isAmazon(u) {
@@ -35,14 +44,16 @@ function isShort(u) {
 
 function rewriteHtml(html, tag, label = 'html') {
   let count = 0;
-  const out = html.replace(HREF_RE, (all, pre, q, raw) => {
+  const out = html.replace(HREF_RE, (...m) => {
+    const all = m[0], pre = m[1], raw = valueOf(m);
     const u = parse(raw);
     if (isShort(u)) throw new Error(label + ': amzn.to short link not allowed (' + raw + ')');
     if (!isAmazon(u)) return all;
+    if (hasOtherEntity(raw)) throw new Error(label + ': unsupported HTML entity in Amazon link (' + raw + ')');
     u.searchParams.delete('tag');
     u.searchParams.append('tag', tag);
     count++;
-    return pre + q + encode(u.href) + q;
+    return pre + '"' + encode(u.href) + '"';
   });
   return { html: out, count };
 }
@@ -50,12 +61,13 @@ function rewriteHtml(html, tag, label = 'html') {
 function validateHtml(html, tag, label = 'html') {
   const errors = []; let count = 0;
   for (const m of html.matchAll(HREF_RE)) {
-    const raw = m[3]; const u = parse(raw);
+    const raw = valueOf(m); const u = parse(raw);
     if (isShort(u)) { errors.push(label + ': amzn.to short link ' + raw); continue; }
     if (!isAmazon(u)) continue;
     count++;
     const tags = u.searchParams.getAll('tag');
     if (tags.length !== 1 || tags[0] !== tag) errors.push(label + ': expected single tag=' + tag + ' got [' + tags.join(',') + '] in ' + raw);
+    if (hasOtherEntity(raw)) errors.push(label + ': unsupported HTML entity in ' + raw);
     if (/&(?!amp;|#\d+;|#x[0-9a-f]+;|[a-z]+;)/i.test(raw)) errors.push(label + ': unescaped & in ' + raw);
   }
   return { errors, count };
