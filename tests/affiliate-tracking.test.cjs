@@ -45,24 +45,99 @@ test('Craighill page provides merchant metadata and directory links to page', ()
   assert.match(directory, /href="craighill-desk-knife.html"/);
 });
 
-test('production Amazon links use the new VoltPick tracking ID', () => {
-  const root = path.join(__dirname, '..');
-  let count = 0;
-  for (const filename of fs.readdirSync(root).filter(name => name.endsWith('.html'))) {
-    const html = fs.readFileSync(path.join(root, filename), 'utf8');
-    assert.doesNotMatch(html, /techwellness(?:-urevo)?-20/, filename);
-    for (const match of html.matchAll(/href=["']([^"']+)["']/g)) {
-      const url = new URL(match[1].replace(/&amp;/g, '&'), 'https://eddieh367-create.github.io/voltpick/');
-      assert.notEqual(url.hostname, 'amzn.to', filename + ': opaque Amazon short link');
-      if (url.hostname === 'amazon.com' || url.hostname.endsWith('.amazon.com')) {
-        assert.equal(url.searchParams.get('tag'), 'voltpick-20', filename + ': ' + url.href);
-        count++;
-      }
-    }
-  }
-  assert.ok(count >= 21, 'expected all existing Amazon shopping links');
+const os = require('node:os');
+const lib = require('../scripts/affiliate-build.cjs');
+const ROOT = path.join(__dirname, '..');
+const CONFIG = lib.loadConfig(path.join(ROOT, 'affiliate.config.json'));
+function tmp() { return fs.mkdtempSync(path.join(os.tmpdir(), 'vp-')); }
+function buildRepo() {
+  const out = path.join(tmp(), '_site');
+  const r = lib.build({ root: ROOT, outDir: out, configFile: path.join(ROOT, 'affiliate.config.json') });
+  return { out, r };
+}
+
+test('production build tags every Amazon link with configured ID', () => {
+  const { out, r } = buildRepo();
+  assert.ok(r.links >= 21, 'expected all existing Amazon shopping links, got ' + r.links);
+  assert.ok(!fs.existsSync(path.join(out, 'tests')) && !fs.existsSync(path.join(out, 'affiliate.config.json')));
+  const html = fs.readFileSync(path.join(out, 'index.html'), 'utf8');
+  assert.doesNotMatch(html, /techwellness|amzn\.to/);
 });
 test('earbuds link preserves search rather than guessing a product', () => {
-  const html = fs.readFileSync(path.join(__dirname, '../best-wireless-earbuds-under-100.html'), 'utf8');
-  assert.match(html, /https:\/\/www\.amazon\.com\/s\?k=samsung\+galaxy\+buds\+3\+pro&amp;tag=voltpick-20/);
+  const { out } = buildRepo();
+  const html = fs.readFileSync(path.join(out, 'best-wireless-earbuds-under-100.html'), 'utf8');
+  assert.ok(html.includes('https://www.amazon.com/s?k=samsung+galaxy+buds+3+pro&amp;tag=' + CONFIG.amazonAssociateTag));
+});
+test('Craighill and non-Amazon content preserved byte-for-byte', () => {
+  const { out } = buildRepo();
+  for (const f of ['craighill-desk-knife.html', 'voltpick.js', 'voltpick.css'])
+    assert.equal(fs.readFileSync(path.join(out, f), 'utf8'), fs.readFileSync(path.join(ROOT, f), 'utf8'), f);
+});
+test('rewrite: missing, wrong, duplicate tags; escaping; quotes; spoof hosts', () => {
+  const src = '<a href="https://www.amazon.com/dp/A">x</a><a href=\'https://amazon.com/s?k=a+b&amp;tag=old-20&amp;tag=old2-20\'>y</a>' +
+    '<a href="https://smile.amazon.com/x?tag=bad-20">z</a><a href="https://amazon.com.evil.org/?tag=old-20">e</a>' +
+    '<a href="https://evil.org/?u=amazon.com">f</a><a href="https://tidd.ly/3U2wJtr">c</a><p>amazon.com tag=old-20</p>';
+  const { html, count } = lib.rewriteHtml(src, 'other-21');
+  assert.equal(count, 3);
+  assert.ok(html.includes('href="https://www.amazon.com/dp/A?tag=other-21"'));
+  assert.ok(html.includes("href='https://amazon.com/s?k=a+b&amp;tag=other-21'"));
+  assert.ok(html.includes('href="https://smile.amazon.com/x?tag=other-21"'));
+  assert.ok(html.includes('href="https://amazon.com.evil.org/?tag=old-20"'));
+  assert.ok(html.includes('href="https://evil.org/?u=amazon.com"') && html.includes('href="https://tidd.ly/3U2wJtr"'));
+  assert.ok(html.includes('<p>amazon.com tag=old-20</p>'));
+  assert.deepEqual(lib.validateHtml(html, 'other-21').errors, []);
+});
+test('validator rejects missing, wrong, duplicate tags, short links, unescaped &', () => {
+  const bad = ['<a href="https://www.amazon.com/dp/A">', '<a href="https://www.amazon.com/dp/A?tag=x-20">',
+    '<a href="https://www.amazon.com/dp/A?tag=voltpick-20&amp;tag=voltpick-20">', '<a href="https://amzn.to/abc">',
+    '<a href="https://www.amazon.com/s?k=a&tag=voltpick-20">'];
+  for (const h of bad) assert.ok(lib.validateHtml(h, 'voltpick-20').errors.length > 0, h);
+  assert.throws(() => lib.rewriteHtml('<a href="https://amzn.to/abc">', 'voltpick-20'), /short link/);
+});
+test('invalid config fails', () => {
+  const d = tmp();
+  for (const body of ['{', '{}', '{"amazonAssociateTag":""}', '{"amazonAssociateTag":"bad tag"}', '{"amazonAssociateTag":"nosuffix"}']) {
+    fs.writeFileSync(path.join(d, 'c.json'), body);
+    assert.throws(() => lib.loadConfig(path.join(d, 'c.json')), /Invalid/, body);
+  }
+});
+test('changing only config retags nested fixture site; short links fail build', () => {
+  const root = tmp();
+  fs.mkdirSync(path.join(root, 'guides/deep'), { recursive: true });
+  fs.mkdirSync(path.join(root, 'tests'));
+  fs.writeFileSync(path.join(root, 'index.html'), '<a href="https://www.amazon.com/dp/B1?tag=voltpick-20">a</a>');
+  fs.writeFileSync(path.join(root, 'guides/deep/p.html'), '<a href="https://amazon.com/s?k=x&amp;tag=old-20">b</a>');
+  fs.writeFileSync(path.join(root, 'tests/skip.html'), '<a href="https://amzn.to/zzz">');
+  fs.writeFileSync(path.join(root, 'cfg.json'), '{"amazonAssociateTag":"newid-20"}');
+  const out = path.join(root, '_site');
+  const r = lib.build({ root, outDir: out, configFile: path.join(root, 'cfg.json') });
+  assert.equal(r.links, 2);
+  assert.ok(fs.readFileSync(path.join(out, 'index.html'), 'utf8').includes('tag=newid-20'));
+  assert.ok(fs.readFileSync(path.join(out, 'guides/deep/p.html'), 'utf8').includes('?k=x&amp;tag=newid-20'));
+  assert.ok(!fs.existsSync(path.join(out, 'tests')));
+  fs.writeFileSync(path.join(root, 'guides/deep/s.html'), '<a href="https://amzn.to/zzz">');
+  assert.throws(() => lib.build({ root, outDir: out, configFile: path.join(root, 'cfg.json') }), /short link/);
+});
+test('unquoted hrefs are rewritten and validated; data-href untouched', () => {
+  const src = '<a href=https://www.amazon.com/dp/U>u</a><a class=x href=https://amazon.com/dp/W?tag=wrong-20>w</a><div data-href="https://www.amazon.com/dp/D">d</div>';
+  const { html, count } = lib.rewriteHtml(src, 'voltpick-20');
+  assert.equal(count, 2);
+  assert.ok(html.includes('href="https://www.amazon.com/dp/U?tag=voltpick-20"'));
+  assert.ok(html.includes('href="https://amazon.com/dp/W?tag=voltpick-20"'));
+  assert.ok(html.includes('data-href="https://www.amazon.com/dp/D"'));
+  assert.deepEqual(lib.validateHtml(html, 'voltpick-20').errors, []);
+  assert.ok(lib.validateHtml('<a href=https://amazon.com/dp/W?tag=wrong-20>', 'voltpick-20').errors.some(e => /wrong-20/.test(e)));
+  assert.ok(lib.validateHtml('<a href=https://amazon.com/dp/W>', 'voltpick-20').errors.length > 0);
+  assert.equal(lib.validateHtml('<div data-href="https://amazon.com/dp/W">', 'voltpick-20').count, 0);
+  assert.equal(lib.rewriteHtml('<a href=/local.html data-href=x>', 'voltpick-20').html, '<a href=/local.html data-href=x>');
+});
+test('numeric entities decoded faithfully; unknown named entities fail closed', () => {
+  for (const amp of ['&#38;', '&#x26;', '&#X26;']) {
+    const { html } = lib.rewriteHtml('<a href="https://www.amazon.com/s?k=buds' + amp + 'tag=old-20' + amp + 'i=aps">', 'voltpick-20');
+    assert.ok(html.includes('href="https://www.amazon.com/s?k=buds&amp;i=aps&amp;tag=voltpick-20"'), html);
+    assert.equal(lib.validateHtml(html, 'voltpick-20').errors.length, 0);
+  }
+  assert.ok(lib.validateHtml('<a href="https://www.amazon.com/dp/A?tag=voltpick-20&#38;tag=old-20">', 'voltpick-20').errors.length > 0);
+  assert.throws(() => lib.rewriteHtml('<a href="https://www.amazon.com/s?k=a&quot;b">', 'voltpick-20'), /entity/);
+  assert.ok(lib.validateHtml('<a href="https://www.amazon.com/s?k=a&quot;b&amp;tag=voltpick-20">', 'voltpick-20').errors.length > 0);
 });
