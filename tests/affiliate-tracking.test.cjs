@@ -17,7 +17,7 @@ function click(href, dataset = {}, targetOverride) {
   listener({ target: targetOverride === undefined ? { closest: () => link } : targetOverride });
   return window.dataLayer.filter(args => args[0] === 'event').map(args => JSON.parse(JSON.stringify(Array.from(args))));
 }
-for (const href of ['https://www.amazon.com/dp/B0113UZJE2?tag=techwellness-20', 'https://amazon.com/dp/example', 'https://smile.amazon.com/example', 'https://amzn.to/example']) {
+for (const href of ['https://www.amazon.com/dp/B0113UZJE2?tag=voltpick-20', 'https://amazon.com/dp/example', 'https://smile.amazon.com/example', 'https://amzn.to/example']) {
   test('tracks Amazon once: ' + href, () => {
     const events = click(href, { product: 'Kitchen scale' });
     assert.equal(events.length, 1);
@@ -43,4 +43,26 @@ test('Craighill page provides merchant metadata and directory links to page', ()
   assert.match(page, /data-product="Craighill Desk Knife" data-affiliate-partner="Craighill"/);
   const directory = fs.readFileSync(path.join(__dirname, '../voltpick-blog.html'), 'utf8');
   assert.match(directory, /href="craighill-desk-knife.html"/);
+});
+
+test('production Amazon links use the new VoltPick tracking ID', () => {
+  const root = path.join(__dirname, '..');
+  let count = 0;
+  for (const filename of fs.readdirSync(root).filter(name => name.endsWith('.html'))) {
+    const html = fs.readFileSync(path.join(root, filename), 'utf8');
+    assert.doesNotMatch(html, /techwellness(?:-urevo)?-20/, filename);
+    for (const match of html.matchAll(/href=["']([^"']+)["']/g)) {
+      const url = new URL(match[1].replace(/&amp;/g, '&'), 'https://eddieh367-create.github.io/voltpick/');
+      assert.notEqual(url.hostname, 'amzn.to', filename + ': opaque Amazon short link');
+      if (url.hostname === 'amazon.com' || url.hostname.endsWith('.amazon.com')) {
+        assert.equal(url.searchParams.get('tag'), 'voltpick-20', filename + ': ' + url.href);
+        count++;
+      }
+    }
+  }
+  assert.ok(count >= 21, 'expected all existing Amazon shopping links');
+});
+test('earbuds link preserves search rather than guessing a product', () => {
+  const html = fs.readFileSync(path.join(__dirname, '../best-wireless-earbuds-under-100.html'), 'utf8');
+  assert.match(html, /https:\/\/www\.amazon\.com\/s\?k=samsung\+galaxy\+buds\+3\+pro&amp;tag=voltpick-20/);
 });
